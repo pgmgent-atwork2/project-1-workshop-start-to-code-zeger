@@ -63,6 +63,36 @@ function onBackgroundClick() {
   gameOver();
 }
 
+function gameOver() {
+  clearInterval(intervalId);
+  const $gameOver = document.getElementById('game-over');
+  const $board = document.getElementById('board');
+  
+  $gameOver.style.display = 'block';
+  $board.classList.add('disabled');
+  document.getElementById('end-score').innerText = `Score: ${score}`;
+  
+  const $ball = document.getElementById('ball');
+  $ball.getAnimations().forEach(animation => animation.cancel());
+  
+  document.addEventListener('keydown', restartGame);
+}
+
+function restartGame(event) {
+  if (event.code === 'Space') {
+    document.removeEventListener('keydown', restartGame);
+    const $gameOver = document.getElementById('game-over');
+    const $board = document.getElementById('board');
+
+    $gameOver.style.display = 'none';
+    $board.classList.remove('disabled');
+    score = 0;
+    intervalDuration = 4000;
+    document.getElementById('score').innerText = `Score: ${score}`;
+    moveBall();
+  }
+}
+
 function init() {
   const $ball = document.getElementById('ball');
   const $board = document.getElementById('board');
@@ -71,21 +101,6 @@ function init() {
   $board.addEventListener('click', onBackgroundClick);
 
   moveBall();
-}
-
-function gameOver() {
-  clearInterval(intervalId);
-  const $gameOver = document.getElementById('game-over');
-  const $board = document.getElementById('board');
-
-  $gameOver.style.display = 'block';
-  $board.classList.add('disabled');
-  document.getElementById('end-score').innerText = `Score: ${score}`;
-
-  const $ball = document.getElementById('ball');
-  $ball.getAnimations().forEach(animation => animation.cancel());
-
-  document.addEventListener('keydown', restartGame);
 }
 
 init();
