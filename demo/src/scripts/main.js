@@ -117,6 +117,12 @@ function checkLeaderboard() {
   }
 }
 
+document.addEventListener("mousemove", (event) => {
+  const customCursor = document.getElementById("custom-cursor");
+  customCursor.style.left = `${event.clientX}px`;
+  customCursor.style.top = `${event.clientY}px`;
+});
+
 function init() {
   const $ball = document.getElementById("ball");
   const $board = document.getElementById("board");
