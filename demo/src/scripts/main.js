@@ -114,6 +114,15 @@ function updateLeaderboard() {
   });
 }
 
+function checkLeaderboard() {
+  if (score > leaderboard[4]) {
+    leaderboard.push(score);
+    leaderboard.sort((a, b) => b - a);
+    leaderboard = leaderboard.slice(0, 5);
+    updateLeaderboard();
+  }
+}
+
 function init() {
   const $ball = document.getElementById('ball');
   const $board = document.getElementById('board');
