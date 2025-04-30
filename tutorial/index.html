@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
@@ -13,13 +13,36 @@
 </head>
 
 <body>
-    <nav>
-        
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <nav class="navbar">
+        <ul class="navbar__list">
+            <li><a href="#hero">Introductie</a></li>
+            <li><a href="#requirements">Benodigdheden</a></li>
+            <li><a href="#stappenplan">Stappenplan</a></li>
+        </ul>
     </nav>
+
     <main>
+        <section class="container container--hero" id="hero">
+            <h1>Workshop: Bouw je eigen reactiespel</h1>
+            <p>Leer stap voor stap hoe je een reactiespel maakt met HTML, CSS en JavaScript.</p>
+            <video autoplay muted loop>
+                <source src="demo-video.mp4" type="video/mp4">
+                Your browser ondersteunt geen video.
+            </video>
+        </section>
+
+        <section class="container" id="requirements">
+            <h2>Benodigdheden</h2>
+            <ul>
+                <li><a href="https://code.visualstudio.com/" target="_blank">VS Code</a></li>
+                <li>Live Server VS Code-extensie (zoek in de extensiemarkt)</li>
+                <li>Browser: <a href="https://www.google.com/chrome/" target="_blank">Chrome</a>, Arc, Safari</li>
+            </ul>
+        </section>
     </main>
     
-    <div class="custom-cursor" id="custom-cursor"></div>
+    
     <script src="./src/scripts/main.js"></script>
 </body>
 
