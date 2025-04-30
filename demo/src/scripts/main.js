@@ -76,6 +76,8 @@ function gameOver() {
   
   const $ball = document.getElementById('ball');
   $ball.getAnimations().forEach(animation => animation.cancel());
+
+  checkLeaderboard();
   
   document.addEventListener('keydown', restartGame);
 }
@@ -91,6 +93,7 @@ function restartGame(event) {
     score = 0;
     intervalDuration = 4000;
     document.getElementById('score').innerText = `Score: ${score}`;
+    updateLeaderboard();
     moveBall();
   }
 }
@@ -131,6 +134,7 @@ function init() {
   $board.addEventListener('click', onBackgroundClick);
 
   moveBall();
+  updateLeaderboard();
 }
 
 init();
