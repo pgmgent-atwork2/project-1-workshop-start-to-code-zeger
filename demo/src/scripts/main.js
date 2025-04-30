@@ -30,11 +30,7 @@ function startInterval() {
   clearInterval(intervalId);
   intervalId = setInterval(() => {
     if (!isClicked) {
-      if (score > 0) { 
-        score -= 1;
-      }
-      document.getElementById('score').innerText = `Score: ${score}`;
-      moveBall();
+      gameOver();
     } else {
       isClicked = false;
     }
@@ -64,10 +60,7 @@ function onBackgroundClick() {
     ],
     { duration: 400, easing: 'ease-in-out' }
   );
-  if (score > 0) {
-    score -= 1;
-  }
-  document.getElementById('score').innerText = `Score: ${score}`;
+  gameOver();
 }
 
 function init() {
@@ -78,6 +71,21 @@ function init() {
   $board.addEventListener('click', onBackgroundClick);
 
   moveBall();
+}
+
+function gameOver() {
+  clearInterval(intervalId);
+  const $gameOver = document.getElementById('game-over');
+  const $board = document.getElementById('board');
+
+  $gameOver.style.display = 'block';
+  $board.classList.add('disabled');
+  document.getElementById('end-score').innerText = `Score: ${score}`;
+
+  const $ball = document.getElementById('ball');
+  $ball.getAnimations().forEach(animation => animation.cancel());
+
+  document.addEventListener('keydown', restartGame);
 }
 
 init();
