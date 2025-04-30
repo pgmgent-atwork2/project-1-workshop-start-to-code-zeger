@@ -1,0 +1,4 @@
+.steps {
+  list-style: none;
+  padding-inline: var(--spacing-base);
+}

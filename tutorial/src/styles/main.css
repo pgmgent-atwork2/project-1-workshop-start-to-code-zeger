@@ -3,6 +3,7 @@
 @import url('./_container.css');
 @import url('./_navbar.css');
 @import url('./_hero.css');
+@import url('./_steps.css');
 
 html {
   scroll-behavior: smooth;
