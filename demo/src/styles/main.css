@@ -55,3 +55,30 @@ body {
 .board.disabled {
   pointer-events: none; 
 }
+
+.leaderboard {
+  position: absolute;
+  top: 4rem; 
+  left: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: black;
+  pointer-events: none;
+
+  & ul {
+    list-style: none;
+    padding-left: 0.5rem;
+  }
+
+  & li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+
+    & span {
+      display: block;
+    }
+  }
+}
