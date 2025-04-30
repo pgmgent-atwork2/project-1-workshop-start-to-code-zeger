@@ -1,4 +1,7 @@
 let score = 0;
+let isClicked = false;
+let intervalId;
+let intervalDuration = 4000;
 
 function moveBall() {
   const $ball = document.getElementById('ball');
@@ -23,11 +26,30 @@ function moveBall() {
   };
 }
 
+function startInterval() {
+  clearInterval(intervalId);
+  intervalId = setInterval(() => {
+    if (!isClicked) {
+      score -= 1;
+      document.getElementById('score').innerText = `Score: ${score}`;
+      moveBall();
+    } else {
+      isClicked = false;
+    }
+  }, intervalDuration);
+}
+
 function onBallClick(event) {
   event.stopPropagation();
+  isClicked = true;
   score += 1;
   document.getElementById('score').innerText = `Score: ${score}`;
+
+  intervalDuration = Math.max(1000, intervalDuration - 200);
+  console.log(`Interval Duration Updated: ${intervalDuration}ms`);  
+
   moveBall();
+  startInterval();
 }
 
 function onBackgroundClick() {
