@@ -3,6 +3,8 @@ let isClicked = false;
 let intervalId;
 let intervalDuration = 4000;
 
+let leaderboard = [0, 0, 0, 0, 0];
+
 function moveBall() {
   const $ball = document.getElementById('ball');
 
@@ -91,6 +93,25 @@ function restartGame(event) {
     document.getElementById('score').innerText = `Score: ${score}`;
     moveBall();
   }
+}
+
+function updateLeaderboard() {
+  const $leaderboardList = document.getElementById('leaderboard-list');
+  $leaderboardList.innerHTML = '';
+
+  leaderboard.forEach((score, index) => {
+    const li = document.createElement('li');
+    
+    const rankSpan = document.createElement('span');
+    rankSpan.textContent = `${index + 1}`;
+
+    const scoreSpan = document.createElement('span');
+    scoreSpan.textContent = score;
+
+    li.appendChild(rankSpan);
+    li.appendChild(scoreSpan);
+    $leaderboardList.appendChild(li);
+  });
 }
 
 function init() {
