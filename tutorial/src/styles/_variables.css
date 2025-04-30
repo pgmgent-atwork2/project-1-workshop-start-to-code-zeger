@@ -1,0 +1,39 @@
+:root {
+  --black: #262625;
+  --white: #f4f4f2;
+  --gray: rgb(203, 203, 203);
+  --orange: orange;
+  --blue: blue;
+
+  --2xs: 0.1rem;
+  --xs: 0.5rem;
+  --sm: 0.625rem;
+  --n: 0.825rem;
+  --base: 1rem;
+  --md: 1.25rem;
+  --lg: 2rem;
+  --xl: 4rem;
+  --2xl: 8rem;
+
+  --background-color: var(--gray);
+  --foreground-color: var(--black);
+  --accent-color: var(--blue);
+  --cursor-color: var(--orange);
+
+  --font-sans: "Work Sans", sans-serif;
+
+  --container-width: 90rem;
+
+  --spacing-mini: var(--2xs);
+  --spacing-xs: var(--xs);
+  --spacing-sm: var(--sm);
+  --spacing-base: var(--md);
+  --spacing-lg: var(--lg);
+  --spacing-xl: var(--xl);
+  --spacing-section: var(--2xl);
+
+  --font-small: var(--sm);
+  --font-base: var(--n);
+  --font-lg: var(--lg);
+  --font-lead: var(--xl);
+}
