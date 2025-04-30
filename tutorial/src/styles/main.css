@@ -2,17 +2,54 @@
 @import url('./_variables.css');
 @import url('./_container.css');
 @import url('./_navbar.css');
+@import url('./_hero.css');
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  overflow: hidden;
   font-family: var(--font-sans);
+  font-size: var(--font-base);
   cursor: none;
   background-color: var(--background-color);
   color: var(--foreground-color);
 }
 
+h1 {
+  font-size: var(--font-lead);
+}
+
+h2 {
+  font-size: var(--font-lg);
+}
+
+h3 {
+  font-size: var(--font-md-lg);
+  font-weight: 500;
+}
+
 a {
+  all: unset;
   cursor: none;
+  position: relative;
+  color: var(--accent-color);
+}
+
+a::after {
+  content: ""; 
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0; 
+  height: 2px; 
+  background-color: currentColor; 
+  border-radius: 1px;
+  transition: width 0.3s ease; 
+}
+
+a:hover::after {
+  width: 100%;
 }
 
 .custom-cursor {

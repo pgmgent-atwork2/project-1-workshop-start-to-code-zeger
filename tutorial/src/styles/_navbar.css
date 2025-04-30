@@ -9,9 +9,16 @@
 
 .navbar__list {
   list-style: none;
-  padding: 0;
+  padding: var(--spacing-xs) var(--spacing-lg);
+  border-radius: var(--spacing-base);
+
   display: flex;
   gap: var(--spacing-base);
+  background-color: var(--foreground-color);
 
-  
+  & a {
+    color: var(--background-color);
+  }
+
+
 }

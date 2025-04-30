@@ -11,6 +11,7 @@
   --n: 0.825rem;
   --base: 1rem;
   --md: 1.25rem;
+  --md-lg: 1.75rem;
   --lg: 2rem;
   --xl: 4rem;
   --2xl: 8rem;
@@ -33,7 +34,8 @@
   --spacing-section: var(--2xl);
 
   --font-small: var(--sm);
-  --font-base: var(--n);
+  --font-base: var(--md);
+  --font-md-lg: var(--md-lg);
   --font-lg: var(--lg);
   --font-lead: var(--xl);
 }

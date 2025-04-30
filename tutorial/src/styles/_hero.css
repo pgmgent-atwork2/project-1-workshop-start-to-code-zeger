@@ -1,0 +1,5 @@
+.hero__video {
+  border-radius: 2rem;
+  overflow: hidden;
+  border: 2px solid var(--foreground-color);
+}
