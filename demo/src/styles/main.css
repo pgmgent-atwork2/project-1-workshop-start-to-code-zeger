@@ -20,3 +20,13 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
+
+.score {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+  pointer-events: none; 
+}
