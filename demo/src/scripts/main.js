@@ -30,7 +30,9 @@ function startInterval() {
   clearInterval(intervalId);
   intervalId = setInterval(() => {
     if (!isClicked) {
-      score -= 1;
+      if (score > 0) { 
+        score -= 1;
+      }
       document.getElementById('score').innerText = `Score: ${score}`;
       moveBall();
     } else {
@@ -38,6 +40,7 @@ function startInterval() {
     }
   }, intervalDuration);
 }
+
 
 function onBallClick(event) {
   event.stopPropagation();
@@ -61,7 +64,9 @@ function onBackgroundClick() {
     ],
     { duration: 400, easing: 'ease-in-out' }
   );
-  score -= 1;
+  if (score > 0) {
+    score -= 1;
+  }
   document.getElementById('score').innerText = `Score: ${score}`;
 }
 
