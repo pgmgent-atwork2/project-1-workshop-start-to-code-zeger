@@ -1,3 +1,5 @@
+let score = 0;
+
 function moveBall() {
   const $ball = document.getElementById('ball');
 
@@ -23,8 +25,9 @@ function moveBall() {
 
 function onBallClick(event) {
   event.stopPropagation();
+  score += 1;
+  document.getElementById('score').innerText = `Score: ${score}`;
   moveBall();
-
 }
 
 function onBackgroundClick() {
@@ -36,6 +39,8 @@ function onBackgroundClick() {
     ],
     { duration: 400, easing: 'ease-in-out' }
   );
+  score -= 1;
+  document.getElementById('score').innerText = `Score: ${score}`;
 }
 
 function init() {
