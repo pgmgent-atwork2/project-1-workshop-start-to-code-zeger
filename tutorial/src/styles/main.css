@@ -4,6 +4,7 @@
 @import url('./_navbar.css');
 @import url('./_hero.css');
 @import url('./_steps.css');
+@import url('./_requirements.css');
 
 html {
   scroll-behavior: smooth;
@@ -31,7 +32,7 @@ h3 {
 }
 
 a {
-  all: unset;
+  text-decoration: none;
   cursor: none;
   position: relative;
   color: var(--accent-color);

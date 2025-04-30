@@ -1,0 +1,13 @@
+.requirements {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+
+  & .requirement__video {
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 2px solid var(--foreground-color);
+    margin-top: var(--spacing-xs);
+  }
+}
+
