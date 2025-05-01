@@ -1,4 +1,46 @@
 .steps {
-  list-style: none;
-  padding-inline: var(--spacing-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding-left: var(--spacing-lg);
+
+  & .step {
+    list-style: none;
+    counter-increment: step;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-base);
+  }
 }
+
+.step__item {
+  counter-reset: substep;
+  padding-left: var(--spacing-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+
+  & .step__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-base);
+    list-style: none;
+    counter-increment: substep;
+    position: relative;
+    padding-left: var(--spacing-lg);
+  
+    & img {
+      align-self: flex-start;
+    }
+  }
+
+  & .step__content::before {
+    content: counter(step) "." counter(substep);
+    position: absolute;
+    left: 0;
+  }
+}
+
+
+
+
