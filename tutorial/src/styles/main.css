@@ -64,3 +64,15 @@ a:hover::after {
   z-index: 1000;
   transition: background-color 0.15s ease-in-out;
 }
+
+.copy-to-clipboard-button {
+  cursor: none;
+  background: var(--background-color) !important;
+  color: var(--foreground-color) !important;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: var(--accent-color) !important;
+    color: var(--background-color) !important;
+  }
+}

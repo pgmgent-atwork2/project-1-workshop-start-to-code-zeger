@@ -10,6 +10,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+
+    <!-- Prism CSS (donker thema) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <!-- Toolbar styles -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css">
+
+    <!-- Prism core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <!-- Prism plugins (juiste volgorde!) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 </head>
 
 <body>
@@ -68,7 +82,10 @@
             </p>
             <ol class="steps">
                 <li class="step">
-                    <h3 class="step__title">Stap 1: <span>Folderstructuur</span></h3>
+                    <h3 class="step__title">Stap 1: Folderstructuur</span></h3>
+                    <p>In deze stap maak je een duidelijke en overzichtelijke mappenstructuur aan voor je project. Dit
+                        zorgt ervoor dat je bestanden logisch geordend zijn en je efficiënter kunt werken en je code
+                        beter kunt onderhouden.</p>
                     <ol class="step__item">
                         <li class="step__content">
                             <p class="step__text">
@@ -83,20 +100,140 @@
 
                         <li class="step__content">
                             <p class="step__text">
-                                Maak in VS Code dezelfde folderstructuur na zoals weergegeven op de afbeelding. Klik daarvoor op het eerste icoontje rechts van de map <code>reaction-game</code> om een nieuw bestand aan te maken (zoals <code>index.html</code>, <code>main.js</code>, <code>main.css</code> en <code>reset.css</code>). Gebruik het tweede icoontje om nieuwe mappen aan te maken, zoals <code>src</code>, <code>scripts</code> en <code>styles</code>. Zorg ervoor dat elk bestand in de juiste map staat zoals in het voorbeeld.
+                                Maak in VS Code dezelfde folderstructuur na zoals weergegeven op de afbeelding. Klik
+                                daarvoor op het eerste icoontje rechts van de map <code>reaction-game</code> om een
+                                nieuw bestand aan te maken (zoals <code>index.html</code>, <code>main.js</code>,
+                                <code>main.css</code> en <code>reset.css</code>). Gebruik het tweede icoontje om nieuwe
+                                mappen aan te maken, zoals <code>src</code>, <code>scripts</code> en
+                                <code>styles</code>. Zorg ervoor dat elk bestand in de juiste map staat zoals in het
+                                voorbeeld.
                             </p>
                             <img src="./src/assets/folder-structure-reaction-game.png" alt="">
                         </li>
 
                         <li class="step__content">
                             <p class="step__text">
-                                Start de Live Server door rechtsonder in de blauwe balk van VS Code te klikken op <strong>Go Live</strong>. Jouw standaardbrowser wordt automatisch geopend en je ziet een blanco webpagina verschijnen. Dit betekent dat alles goed is ingesteld en je klaar bent om te beginnen met bouwen!
+                                Start de Live Server door rechtsonder in de blauwe balk van VS Code te klikken op
+                                <strong>Go Live</strong>. Jouw standaardbrowser wordt automatisch geopend en je ziet een
+                                blanco webpagina verschijnen. Dit betekent dat alles goed is ingesteld en je klaar bent
+                                om te beginnen met bouwen!
                             </p>
                         </li>
                     </ol>
                 </li>
 
-                
+                <li class="step">
+                    <h3 class="step__title">Stap 2: <span>HTML & CSS</span></h3>
+                    <ol class="step__item">
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Kopieer de onderstaande HTML-code in het bestand <code>index.html</code>. Dit is de
+                                basisstructuur van je pagina.
+                            </p>
+                            <pre class="language-html"><code>
+                  &lt;!DOCTYPE html&gt;
+                  &lt;html lang="en"&gt;
+                  
+                  &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title&gt;Reaction game&lt;/title&gt;
+                    &lt;link rel="stylesheet" href="./src/styles/main.css"&gt;
+                    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+                    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+                    &lt;link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"&gt;
+                  &lt;/head&gt;
+                  
+                  &lt;body&gt;
+                    &lt;main class="board" id="board"&gt;
+                      &lt;div class="ball" id="ball"&gt;&lt;/div&gt;
+                    &lt;/main&gt;
+                  
+                    &lt;script src="./src/scripts/main.js"&gt;&lt;/script&gt;
+                  &lt;/body&gt;
+                  
+                  &lt;/html&gt;
+                  </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Kopieer de volgende code in het bestand <code>reset.css</code>. Deze reset zorgt ervoor
+                                dat je layout er in elke browser hetzelfde uitziet.
+                            </p>
+                            <pre class="language-css"><code>
+                  *, 
+                  *::before, 
+                  *::after {
+                    box-sizing: border-box;
+                  }
+                  
+                  * {
+                    margin: 0;
+                  }
+                  
+                  html {
+                    height: 100%;
+                  }
+                  
+                  body {
+                    min-height: 100%;
+                    line-height: 1.5;
+                    -webkit-font-smoothing: antialiased;
+                  }
+                  
+                  img, picture, video, canvas, svg {
+                    display: block;
+                    max-width: 100%;
+                  }
+                  
+                  input, button, textarea, select {
+                    font: inherit;
+                  }
+                  
+                  p, h1, h2, h3, h4, h5, h6 {
+                    overflow-wrap: break-word;
+                  }
+                  </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Plak de onderstaande CSS-code in het bestand <code>main.css</code>. Dit zorgt voor de
+                                eerste styling van je pagina en de bal.
+                            </p>
+                            <pre class="language-css"><code>
+                  @import url('./reset.css');
+                  
+                  body {
+                    overflow: hidden;
+                    font-family: "Work Sans", sans-serif;
+                  }
+                  
+                  .board {
+                    position: relative;
+                    width: 100vw;
+                    height: 100vh;
+                    background-color: rgb(203, 203, 203);
+                  }
+                  
+                  .ball {
+                    position: absolute;
+                    width: 50px;
+                    height: 50px;
+                    background-color: blue;
+                    border-radius: 50%;
+                    cursor: pointer;
+                  }
+                  </code></pre>
+                        </li>
+
+                    </ol>
+                </li>
+
+
+
             </ol>
 
 

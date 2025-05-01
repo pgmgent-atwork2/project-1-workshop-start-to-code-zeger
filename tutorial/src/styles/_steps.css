@@ -27,7 +27,7 @@
     list-style: none;
     counter-increment: substep;
     position: relative;
-    padding-left: var(--spacing-lg);
+    padding-left: 2.5rem;
   
     & img {
       align-self: flex-start;
