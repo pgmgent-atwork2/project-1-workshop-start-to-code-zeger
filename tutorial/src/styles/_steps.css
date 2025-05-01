@@ -41,6 +41,16 @@
   }
 }
 
+.step__finish {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-base);
+
+  & img {
+    align-self: flex-start;
+  }
+}
+
 
 
 
