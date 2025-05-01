@@ -125,7 +125,7 @@
                 </li>
 
                 <li class="step">
-                    <h3 class="step__title">Stap 2: <span>HTML & CSS</span></h3>
+                    <h3 class="step__title">Stap 2: HTML & CSS</h3>
                     <ol class="step__item">
 
                         <li class="step__content">
@@ -262,7 +262,7 @@
 
 
                 <li class="step">
-                    <h3 class="step__title">Stap 3: <span>Bal laten bewegen & aangepaste cursor activeren</span></h3>
+                    <h3 class="step__title">Stap 3: Bal laten bewegen & aangepaste cursor activeren</h3>
                     <p>
                         In deze stap voeg je JavaScript toe om de bal te laten bewegen wanneer je erop klikt. Je
                         gebruikt animaties om de bal vloeiend naar een willekeurige positie te verplaatsen. Ook wordt de
@@ -348,7 +348,7 @@
                 </li>
 
                 <li class="step">
-                    <h3 class="step__title">Stap 4: <span>Score bijhouden bij klikken</span></h3>
+                    <h3 class="step__title">Stap 4: Score bijhouden bij klikken</h3>
                     <p>
                         In deze stap voegen we een score toe aan je spel. Elke keer als je op de bal klikt, stijgt je
                         score met 1. Klik je naast de bal, dan gaat er 1 punt af. De score wordt linksboven op het
@@ -459,7 +459,7 @@
                                   customCursor.style.top = `${event.clientY}px`;
                                 });
                                 </code></pre>
-                                
+
                         </li>
 
                         <li class="step__content">
@@ -467,6 +467,127 @@
                                 Als je alles correct hebt ingevoerd, zie je nu linksboven je score staan. Klik je op de
                                 bal, dan stijgt je score. Klik je ernaast, dan daalt die. De aangepaste cursor werkt ook
                                 nog steeds. Goed gedaan!
+                            </p>
+                        </li>
+
+                    </ol>
+                </li>
+
+                <li class="step">
+                    <h3 class="step__title">Stap 5: Interval & moeilijkheidsgraad</h3>
+                    <p>
+                        In deze stap maken we het spel spannender. Als de speler niet snel genoeg op de bal klikt, gaat
+                        er een punt af en verschijnt de bal op een nieuwe plek. Elke correcte klik verkort het interval,
+                        waardoor het spel steeds moeilijker wordt.
+                    </p>
+
+                    <ol class="step__item">
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Open het bestand <code>main.js</code> en vervang de bestaande code met de onderstaande
+                                versie. Hiermee voeg je een automatisch interval toe dat de bal laat verplaatsen als er
+                                niet op tijd wordt geklikt.
+                            </p>
+                            <pre class="language-js"><code>
+                  let score = 0;
+                  let isClicked = false;
+                  let intervalId;
+                  let intervalDuration = 4000;
+                  
+                  function moveBall() {
+                    const $ball = document.getElementById('ball');
+                  
+                    const maxX = window.innerWidth - $ball.offsetWidth;
+                    const maxY = window.innerHeight - $ball.offsetHeight;
+                  
+                    const randomX = Math.random() * maxX;
+                    const randomY = Math.random() * maxY;
+                  
+                    $ball.getAnimations().forEach(animation => animation.cancel());
+                  
+                    const animation = $ball.animate(
+                      [
+                        { transform: `translate(${randomX}px, ${randomY}px)` }
+                      ],
+                      { duration: 1000, fill: 'forwards' }
+                    );
+                  
+                    animation.onfinish = () => {
+                      $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                    };
+                  }
+                  
+                  function startInterval() {
+                    clearInterval(intervalId);
+                    intervalId = setInterval(() => {
+                      if (!isClicked) {
+                        if (score > 0) {
+                          score -= 1;
+                        }
+                        document.getElementById('score').innerText = `Score: ${score}`;
+                        moveBall();
+                      } else {
+                        isClicked = false;
+                      }
+                    }, intervalDuration);
+                  }
+                  
+                  function onBallClick(event) {
+                    event.stopPropagation();
+                    isClicked = true;
+                    score += 1;
+                    document.getElementById('score').innerText = `Score: ${score}`;
+                  
+                    intervalDuration = Math.max(1000, intervalDuration - 200);
+                    console.log(`Interval Duration Updated: ${intervalDuration}ms`);
+                  
+                    moveBall();
+                    startInterval();
+                  }
+                  
+                  function onBackgroundClick() {
+                    const $board = document.getElementById('board');
+                    $board.animate(
+                      [
+                        { backgroundColor: 'red' },
+                        { backgroundColor: 'rgb(203, 203, 203)' }
+                      ],
+                      { duration: 400, easing: 'ease-in-out' }
+                    );
+                    if (score > 0) {
+                      score -= 1;
+                    }
+                    document.getElementById('score').innerText = `Score: ${score}`;
+                  }
+                  
+                  function init() {
+                    const $ball = document.getElementById('ball');
+                    const $board = document.getElementById('board');
+                  
+                    $ball.addEventListener('click', onBallClick);
+                    $board.addEventListener('click', onBackgroundClick);
+                  
+                    moveBall();
+                  }
+                  
+                  init();
+                  
+                  document.addEventListener("mousemove", (event) => {
+                    const customCursor = document.getElementById("custom-cursor");
+                    customCursor.style.left = `${event.clientX}px`;
+                    customCursor.style.top = `${event.clientY}px`;
+                  });
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Als alles goed werkt, zie je nu dat het spel start zodra je voor het eerst op de bal
+                                klikt. Vanaf dat moment zal de bal automatisch blijven bewegen als je niet snel genoeg
+                                reageert. Wanneer je te laat bent of naast de bal klikt, verlies je een punt — maar de
+                                score zal nooit onder nul zakken. Elke juiste klik maakt het spel moeilijker door het
+                                interval met 200 milliseconden te verkorten. Zo wordt het steeds spannender!
                             </p>
                         </li>
 
