@@ -1,11 +1,11 @@
 @import url('./reset.css');
 @import url('./_variables.css');
-@import url('./_container.css');
-@import url('./_navbar.css');
-@import url('./_hero.css');
-@import url('./_steps.css');
-@import url('./_requirements.css');
-@import url('./_footer.css');
+@import url('./container.css');
+@import url('./navbar.css');
+@import url('./hero.css');
+@import url('./steps.css');
+@import url('./requirements.css');
+@import url('./footer.css');
 
 html {
   scroll-behavior: smooth;
