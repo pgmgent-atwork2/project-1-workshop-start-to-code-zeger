@@ -594,6 +594,192 @@
                     </ol>
                 </li>
 
+                <li class="step">
+                    <h3 class="step__title">Stap 6: Game Over & Herstart</h3>
+                    <p>
+                        In deze stap voeg je een <strong>Game Over-scherm</strong> toe dat verschijnt wanneer je naast
+                        de bal klikt of niet snel genoeg reageert. Het spel pauzeert, toont je eindscore en kan opnieuw
+                        worden gestart door op de spatiebalk te drukken.
+                    </p>
+
+                    <ol class="step__item">
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Voeg de onderstaande HTML toe onderaan de <code>&lt;main&gt;</code>-tag in je
+                                <code>index.html</code>.
+                            </p>
+                            <pre class="language-html"><code>
+                  &lt;div class="game-over" id="game-over" style="display: none;"&gt;
+                    &lt;p class="end-score" id="end-score"&gt;Score: 0&lt;/p&gt;
+                    &lt;p&gt;Game Over&lt;/p&gt;
+                    &lt;p&gt;Press Space to Restart&lt;/p&gt;
+                  &lt;/div&gt;
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Voeg onderstaande CSS toe aan <code>main.css</code> om het Game Over-scherm te stylen en
+                                het spel tijdelijk te blokkeren.
+                            </p>
+                            <pre class="language-css"><code>
+                  .game-over {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-align: center;
+                    font-size: 2rem;
+                    font-weight: bold;
+                    color: red;
+                    background-color: rgba(255, 255, 255, 0.9);
+                    padding: 1rem 2rem;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                    z-index: 10;
+                  }
+                  
+                  .game-over .end-score {
+                    color: black;
+                    font-size: 3rem;
+                  }
+                  
+                  .board.disabled {
+                    pointer-events: none;
+                  }
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Vervang nu de volledige inhoud van <code>main.js</code> met onderstaande code. Deze
+                                bevat de game-over logica en herstart het spel wanneer je op de spatiebalk drukt.
+                            </p>
+                            <pre class="language-js"><code>
+                  let score = 0;
+                  let isClicked = false;
+                  let intervalId;
+                  let intervalDuration = 4000;
+                  
+                  function moveBall() {
+                    const $ball = document.getElementById('ball');
+                  
+                    const maxX = window.innerWidth - $ball.offsetWidth;
+                    const maxY = window.innerHeight - $ball.offsetHeight;
+                  
+                    const randomX = Math.random() * maxX;
+                    const randomY = Math.random() * maxY;
+                  
+                    $ball.getAnimations().forEach(animation => animation.cancel());
+                  
+                    const animation = $ball.animate(
+                      [
+                        { transform: `translate(${randomX}px, ${randomY}px)` }
+                      ],
+                      { duration: 1000, fill: 'forwards' }
+                    );
+                  
+                    animation.onfinish = () => {
+                      $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                    };
+                  }
+                  
+                  function startInterval() {
+                    clearInterval(intervalId);
+                    intervalId = setInterval(() => {
+                      if (!isClicked) {
+                        gameOver();
+                      } else {
+                        isClicked = false;
+                      }
+                    }, intervalDuration);
+                  }
+                  
+                  function onBallClick(event) {
+                    event.stopPropagation();
+                    isClicked = true;
+                    score += 1;
+                    document.getElementById('score').innerText = `Score: ${score}`;
+                  
+                    intervalDuration = Math.max(1000, intervalDuration - 200);
+                    console.log(`Interval Duration Updated: ${intervalDuration}ms`);
+                  
+                    moveBall();
+                    startInterval();
+                  }
+                  
+                  function onBackgroundClick() {
+                    const $board = document.getElementById('board');
+                    $board.animate(
+                      [
+                        { backgroundColor: 'red' },
+                        { backgroundColor: 'rgb(203, 203, 203)' }
+                      ],
+                      { duration: 400, easing: 'ease-in-out' }
+                    );
+                    gameOver();
+                  }
+                  
+                  function gameOver() {
+                    clearInterval(intervalId);
+                    const $gameOver = document.getElementById('game-over');
+                    const $board = document.getElementById('board');
+                  
+                    $gameOver.style.display = 'block';
+                    $board.classList.add('disabled');
+                    document.getElementById('end-score').innerText = `Score: ${score}`;
+                  
+                    document.addEventListener('keydown', restartGame);
+                  }
+                  
+                  function restartGame(event) {
+                    if (event.code === 'Space') {
+                      document.removeEventListener('keydown', restartGame);
+                      const $gameOver = document.getElementById('game-over');
+                      const $board = document.getElementById('board');
+                  
+                      $gameOver.style.display = 'none';
+                      $board.classList.remove('disabled');
+                      score = 0;
+                      intervalDuration = 4000;
+                      document.getElementById('score').innerText = `Score: ${score}`;
+                      moveBall();
+                    }
+                  }
+                  
+                  function init() {
+                    const $ball = document.getElementById('ball');
+                    const $board = document.getElementById('board');
+                  
+                    $ball.addEventListener('click', onBallClick);
+                    $board.addEventListener('click', onBackgroundClick);
+                  
+                    moveBall();
+                  }
+                  
+                  init();
+                  
+                  document.addEventListener("mousemove", (event) => {
+                    const customCursor = document.getElementById("custom-cursor");
+                    customCursor.style.left = `${event.clientX}px`;
+                    customCursor.style.top = `${event.clientY}px`;
+                  });
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Als alles juist is ingesteld, verschijnt er nu een Game Over-scherm wanneer je naast de
+                                bal klikt of als je niet snel genoeg reageert. Je eindscore wordt getoond, en je kunt
+                                het spel herstarten door op de spatiebalk te drukken.
+                            </p>
+                        </li>
+
+                    </ol>
+                </li>
+
+
 
 
 
