@@ -260,7 +260,6 @@
                     </ol>
                 </li>
 
-
                 <li class="step">
                     <h3 class="step__title">Stap 3: Bal laten bewegen & aangepaste cursor activeren</h3>
                     <p>
@@ -775,6 +774,225 @@
                                 het spel herstarten door op de spatiebalk te drukken.
                             </p>
                         </li>
+
+                    </ol>
+                </li>
+
+                <li class="step">
+                    <h3 class="step__title">Stap 7: Leaderboard</h3>
+                    <p>
+                        In deze laatste stap voeg je een <strong>Leaderboard</strong> toe dat automatisch de vijf
+                        hoogste scores onthoudt. Zo kun je jezelf blijven uitdagen en proberen je vorige scores te
+                        verbeteren!
+                    </p>
+
+                    <ol class="step__item">
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Voeg de onderstaande HTML toe in je <code>index.html</code>, net onder het score-element
+                                binnen de <code>&lt;main&gt;</code>-tag.
+                            </p>
+                            <pre class="language-html"><code>
+                  &lt;div class="leaderboard" id="leaderboard"&gt;
+                    &lt;h3&gt;Top 5 Scores:&lt;/h3&gt;
+                    &lt;ul id="leaderboard-list"&gt;&lt;/ul&gt;
+                  &lt;/div&gt;
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Voeg deze CSS toe aan <code>main.css</code> om de leaderboard zichtbaar en goed
+                                gepositioneerd te maken.
+                            </p>
+                            <pre class="language-css"><code>
+                  .leaderboard {
+                    position: absolute;
+                    top: 4rem; 
+                    left: 1rem;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: #262625;
+                    pointer-events: none;
+                  }
+                  
+                  .leaderboard ul {
+                    list-style: none;
+                    padding-left: 0.5rem;
+                  }
+                  
+                  .leaderboard li {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    text-align: center;
+                    font-size: 1rem;
+                    font-weight: 500;
+                  }
+                  
+                  .leaderboard li span {
+                    display: block;
+                  }
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Vervang de volledige inhoud van <code>main.js</code> met de onderstaande code. Die houdt
+                                bij of je score in de top 5 hoort, en toont automatisch de bijgewerkte lijst na elk
+                                spel.
+                            </p>
+                            <pre class="language-js"><code>
+                  let score = 0;
+                  let isClicked = false;
+                  let intervalId;
+                  let intervalDuration = 4000;
+                  
+                  let leaderboard = [0, 0, 0, 0, 0];
+                  
+                  function moveBall() {
+                    const $ball = document.getElementById("ball");
+                  
+                    const maxX = window.innerWidth - $ball.offsetWidth;
+                    const maxY = window.innerHeight - $ball.offsetHeight;
+                  
+                    const randomX = Math.random() * maxX;
+                    const randomY = Math.random() * maxY;
+                  
+                    $ball.getAnimations().forEach((animation) => animation.cancel());
+                  
+                    const animation = $ball.animate(
+                      [{ transform: `translate(${randomX}px, ${randomY}px)` }],
+                      { duration: 1000, fill: "forwards" }
+                    );
+                  
+                    animation.onfinish = () => {
+                      $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                    };
+                  }
+                  
+                  function startInterval() {
+                    clearInterval(intervalId);
+                    intervalId = setInterval(() => {
+                      if (!isClicked) {
+                        gameOver();
+                      } else {
+                        isClicked = false;
+                      }
+                    }, intervalDuration);
+                  }
+                  
+                  function onBallClick(event) {
+                    event.stopPropagation();
+                    isClicked = true;
+                    score += 1;
+                    document.getElementById("score").innerText = `Score: ${score}`;
+                  
+                    intervalDuration = Math.max(1000, intervalDuration - 200);
+                    console.log(`Interval Duration Updated: ${intervalDuration}ms`);
+                  
+                    moveBall();
+                    startInterval();
+                  }
+                  
+                  function onBackgroundClick() {
+                    const $board = document.getElementById("board");
+                    $board.animate(
+                      [{ backgroundColor: "red" }, { backgroundColor: "rgb(203, 203, 203)" }],
+                      { duration: 400, easing: "ease-in-out" }
+                    );
+                    gameOver();
+                  }
+                  
+                  function gameOver() {
+                    clearInterval(intervalId);
+                    const $gameOver = document.getElementById("game-over");
+                    const $board = document.getElementById("board");
+                  
+                    $gameOver.style.display = "block";
+                    $board.classList.add("disabled");
+                    document.getElementById("end-score").innerText = `Score: ${score}`;
+                  
+                    checkLeaderboard();
+                  
+                    document.addEventListener("keydown", restartGame);
+                  }
+                  
+                  function restartGame(event) {
+                    if (event.code === "Space") {
+                      document.removeEventListener("keydown", restartGame);
+                      const $gameOver = document.getElementById("game-over");
+                      const $board = document.getElementById("board");
+                  
+                      $gameOver.style.display = "none";
+                      $board.classList.remove("disabled");
+                      score = 0;
+                      intervalDuration = 4000;
+                      document.getElementById("score").innerText = `Score: ${score}`;
+                      updateLeaderboard();
+                      moveBall();
+                    }
+                  }
+                  
+                  function updateLeaderboard() {
+                    const $leaderboardList = document.getElementById("leaderboard-list");
+                    $leaderboardList.innerHTML = "";
+                  
+                    leaderboard.forEach((score, index) => {
+                      const li = document.createElement("li");
+                  
+                      const rankSpan = document.createElement("span");
+                      rankSpan.textContent = `${index + 1}`;
+                  
+                      const scoreSpan = document.createElement("span");
+                      scoreSpan.textContent = score;
+                  
+                      li.appendChild(rankSpan);
+                      li.appendChild(scoreSpan);
+                      $leaderboardList.appendChild(li);
+                    });
+                  }
+                  
+                  function checkLeaderboard() {
+                    if (score > leaderboard[4]) {
+                      leaderboard.push(score);
+                      leaderboard.sort((a, b) => b - a);
+                      leaderboard = leaderboard.slice(0, 5);
+                      updateLeaderboard();
+                    }
+                  }
+                  
+                  function init() {
+                    const $ball = document.getElementById("ball");
+                    const $board = document.getElementById("board");
+                  
+                    $ball.addEventListener("click", onBallClick);
+                    $board.addEventListener("click", onBackgroundClick);
+                  
+                    moveBall();
+                    updateLeaderboard();
+                  }
+                  
+                  init();
+                  
+                  document.addEventListener("mousemove", (event) => {
+                    const customCursor = document.getElementById("custom-cursor");
+                    customCursor.style.left = `${event.clientX}px`;
+                    customCursor.style.top = `${event.clientY}px`;
+                  });
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                              Je spel toont nu een top 5-scorebord dat automatisch wordt bijgewerkt na elk spel. Je hebt een volledig werkende reaction game gebouwd — inclusief scoretelling, game over-logica en leaderboard. <br><br>
+                              Bedankt om deze workshop te volgen, en <strong>proficiat</strong> met het resultaat! <span class="hooray">GREAT SUCCES 🎯</span><br><br>
+                              Jouw eindresultaat zou er nu zo moeten uitzien:
+                            </p>
+                            <video autoplay muted loop>
+                              <source src="./src/assets/end-result-reaction-game.mp4" type="video/mp4">
+                            </video>
+                          </li>
 
                     </ol>
                 </li>

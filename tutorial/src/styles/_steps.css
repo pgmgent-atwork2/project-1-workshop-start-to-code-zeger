@@ -34,6 +34,11 @@
       border: 1px solid var(--foreground-color);
       border-radius: 1rem;
     }
+
+    & video {
+      border: 1px solid var(--foreground-color);
+      border-radius: 1rem;
+    }
   }
 
   & .step__content::before {
@@ -43,7 +48,10 @@
   }
 }
 
-
+.hooray {
+  font-weight: 700;
+  font-size: 2rem;
+}
 
 
 
