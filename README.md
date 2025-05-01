@@ -16,6 +16,7 @@ In deze workshop leer je stap voor stap hoe je een reaction game maakt met HTML,
 ## 🧪 Eindresultaat
 
 Aan het einde heb je een volledig werkende reaction game met score, game over melding en leaderboard.
+![Eindresultaat van de reaction game](tutorial/src/assets/thumbnail-reaction-game.png)
 
 👉 Bekijk de live versie via **GitHub Pages**:  
 
