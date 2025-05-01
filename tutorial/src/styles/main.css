@@ -65,8 +65,14 @@ a:hover::after {
   transition: background-color 0.15s ease-in-out;
 }
 
+.toolbar {
+  top: 0.5rem !important;
+  right: 1.5rem !important;
+}
+
 .copy-to-clipboard-button {
   cursor: none;
+  right: 1rem;
   background: var(--background-color) !important;
   color: var(--foreground-color) !important;
   transition: all 0.3s ease-in-out;
@@ -75,4 +81,10 @@ a:hover::after {
     background: var(--accent-color) !important;
     color: var(--background-color) !important;
   }
+}
+
+pre[class*="language-"] {
+  overflow: auto;
+  max-height: 90svh;
+  max-height: 90vh;
 }

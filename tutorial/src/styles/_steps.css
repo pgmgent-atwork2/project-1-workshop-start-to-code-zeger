@@ -31,6 +31,8 @@
   
     & img {
       align-self: flex-start;
+      border: 1px solid var(--foreground-color);
+      border-radius: 1rem;
     }
   }
 
@@ -41,15 +43,7 @@
   }
 }
 
-.step__finish {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-base);
 
-  & img {
-    align-self: flex-start;
-  }
-}
 
 
 

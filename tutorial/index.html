@@ -130,8 +130,11 @@
 
                         <li class="step__content">
                             <p class="step__text">
-                                Open het bestand <code>index.html</code> dat je in stap 1 hebt aangemaakt, en plak de onderstaande HTML-code erin. Dit vormt de basisstructuur van je webpagina en koppelt de juiste CSS en JavaScript-bestanden.
-                              </p>
+                                Open het bestand <code>index.html</code> dat je in stap 1 hebt aangemaakt en plak de
+                                onderstaande HTML-code erin. Deze code vormt de basisstructuur van je webpagina en
+                                koppelt je CSS- en JavaScript-bestanden. Ook voegen we alvast de bal en de aangepaste
+                                cursor toe.
+                            </p>
                             <pre class="language-html"><code>
                   &lt;!DOCTYPE html&gt;
                   &lt;html lang="en"&gt;
@@ -148,6 +151,7 @@
                   
                   &lt;body&gt;
                     &lt;main class="board" id="board"&gt;
+                      &lt;div class="custom-cursor" id="custom-cursor"&gt;&lt;/div&gt;
                       &lt;div class="ball" id="ball"&gt;&lt;/div&gt;
                     &lt;/main&gt;
                   
@@ -155,14 +159,14 @@
                   &lt;/body&gt;
                   
                   &lt;/html&gt;
-                  </code></pre>
+                        </code></pre>
                         </li>
 
                         <li class="step__content">
                             <p class="step__text">
-                                <p class="step__text">
-                                    Open het bestand <code>reset.css</code> en plak de onderstaande code erin. Deze CSS-reset zorgt ervoor dat je layout er in elke browser consistent uitziet.
-                                  </p>
+                                Open het bestand <code>reset.css</code> en plak de onderstaande code erin. Deze
+                                CSS-reset zorgt ervoor dat je layout er in elke browser consistent uitziet.
+                            </p>
                             <pre class="language-css"><code>
                   *, 
                   *::before, 
@@ -196,19 +200,31 @@
                   p, h1, h2, h3, h4, h5, h6 {
                     overflow-wrap: break-word;
                   }
-                  </code></pre>
+                        </code></pre>
                         </li>
 
                         <li class="step__content">
                             <p class="step__text">
-                                Open het bestand <code>main.css</code> en plak de onderstaande CSS-code erin. Deze code zorgt voor de basisstyling van de pagina, het speelveld en de bal.
-                              </p>
+                                Open het bestand <code>main.css</code> en plak de onderstaande CSS-code erin. Hiermee
+                                stijlen we de pagina, het speelveld, de bal en de aangepaste cursor.
+                            </p>
                             <pre class="language-css"><code>
                   @import url('./reset.css');
                   
                   body {
                     overflow: hidden;
                     font-family: "Work Sans", sans-serif;
+                    cursor: none;
+                  }
+                  
+                  .custom-cursor {
+                    position: fixed;
+                    width: 1rem;
+                    height: 1rem;
+                    background-color: orange;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1000;
                   }
                   
                   .board {
@@ -224,20 +240,118 @@
                     height: 50px;
                     background-color: blue;
                     border-radius: 50%;
-                    cursor: pointer;
                   }
-                  </code></pre>
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                            <p class="step__text">
+                                Als je alle code correct hebt gekopieerd en geplakt in de juiste bestanden, zie je in je
+                                browser nu een pagina met een grijs speelveld, een blauwe bal in de linkerbovenhoek en
+                                een kleine oranje bal erboven — dit wordt straks je aangepaste cursor. Wanneer je op de
+                                bal klikt, gebeurt er nog niets. Dat gaan we toevoegen in de volgende stap!
+                            </p>
+                            </p>
+                            <img src="./src/assets/step-1-finished.png"
+                                alt="Voorbeeldweergave van het resultaat na stap 2">
                         </li>
 
                     </ol>
-                    <div class="step__finish">
-                        <p>
-                            Als je alle code correct hebt gekopieerd en geplakt in de juiste bestanden, zie je in je browser nu een pagina met een grijs speelveld en een blauwe bal in de linkerbovenhoek, net zoals op de afbeelding hieronder. Wanneer je op de bal klikt, gebeurt er nog niets — dat bouwen we in de volgende stap!
-                          </p>
-                          <img src="./src/assets/step-1-tutorial-finish.png" alt="">
-
-                    </div>
                 </li>
+
+
+                <li class="step">
+                    <h3 class="step__title">Stap 3: <span>Bal laten bewegen & aangepaste cursor activeren</span></h3>
+                    <p>
+                        In deze stap voeg je JavaScript toe om de bal te laten bewegen wanneer je erop klikt. Je
+                        gebruikt animaties om de bal vloeiend naar een willekeurige positie te verplaatsen. Ook wordt de
+                        aangepaste oranje cursor nu actief, zodat deze de beweging van je muis volgt. Als je naast de
+                        bal klikt, licht de achtergrond kort rood op als visuele feedback.
+                    </p>
+
+                    <ol class="step__item">
+                        <li class="step__content">
+                            <p class="step__text">
+                                Open het bestand <code>main.js</code> en vervang de bestaande code met de onderstaande
+                                JavaScript. Sla het bestand op en vernieuw je browser om de werking te testen.
+                            </p>
+                            <pre class="language-js"><code>
+                  function moveBall() {
+                    const $ball = document.getElementById('ball');
+                  
+                    const maxX = window.innerWidth - $ball.offsetWidth;
+                    const maxY = window.innerHeight - $ball.offsetHeight;
+                  
+                    const randomX = Math.random() * maxX;
+                    const randomY = Math.random() * maxY;
+                  
+                    $ball.getAnimations().forEach(animation => animation.cancel());
+                  
+                    const animation = $ball.animate(
+                      [
+                        { transform: `translate(${randomX}px, ${randomY}px)` }
+                      ],
+                      { duration: 1000, fill: 'forwards' }
+                    );
+                  
+                    animation.onfinish = () => {
+                      $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                    };
+                  }
+                  
+                  function onBallClick(event) {
+                    event.stopPropagation();
+                    moveBall();
+                  }
+                  
+                  function onBackgroundClick() {
+                    const $board = document.getElementById('board');
+                    $board.animate(
+                      [
+                        { backgroundColor: 'red' },
+                        { backgroundColor: 'rgb(203, 203, 203)' }
+                      ],
+                      { duration: 400, easing: 'ease-in-out' }
+                    );
+                  }
+                  
+                  function init() {
+                    const $ball = document.getElementById('ball');
+                    const $board = document.getElementById('board');
+                  
+                    $ball.addEventListener('click', onBallClick);
+                    $board.addEventListener('click', onBackgroundClick);
+                  
+                    moveBall();
+                  }
+                  
+                  init();
+                  
+                  document.addEventListener("mousemove", (event) => {
+                    const customCursor = document.getElementById("custom-cursor");
+                    customCursor.style.left = `${event.clientX}px`;
+                    customCursor.style.top = `${event.clientY}px`;
+                  });
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Als alles correct is ingevoerd, beweegt de bal nu automatisch naar een willekeurige
+                                positie en verplaatst hij telkens je erop klikt. De oranje cursor volgt je muis over het
+                                speelveld, en bij een klik naast de bal licht de achtergrond kort rood op. Alles werkt
+                                nu dynamisch dankzij JavaScript!
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+
+
+
+
+
+
 
 
 
