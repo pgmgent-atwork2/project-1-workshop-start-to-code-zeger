@@ -5,6 +5,7 @@
 @import url('./_hero.css');
 @import url('./_steps.css');
 @import url('./_requirements.css');
+@import url('./_footer.css');
 
 html {
   scroll-behavior: smooth;

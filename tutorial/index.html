@@ -72,6 +72,7 @@
                 </video>
             </ul>
         </section>
+
         <section class="container container--steps" id="stappenplan">
             <h2>Stappenplan</h2>
             <p>
@@ -246,12 +247,10 @@
 
                         <li class="step__content">
                             <p class="step__text">
-                            <p class="step__text">
                                 Als je alle code correct hebt gekopieerd en geplakt in de juiste bestanden, zie je in je
                                 browser nu een pagina met een grijs speelveld, een blauwe bal in de linkerbovenhoek en
                                 een kleine oranje bal erboven — dit wordt straks je aangepaste cursor. Wanneer je op de
                                 bal klikt, gebeurt er nog niets. Dat gaan we toevoegen in de volgende stap!
-                            </p>
                             </p>
                             <img src="./src/assets/step-1-finished.png"
                                 alt="Voorbeeldweergave van het resultaat na stap 2">
@@ -985,32 +984,80 @@
 
                         <li class="step__content">
                             <p class="step__text">
-                              Je spel toont nu een top 5-scorebord dat automatisch wordt bijgewerkt na elk spel. Je hebt een volledig werkende reaction game gebouwd — inclusief scoretelling, game over-logica en leaderboard. <br><br>
-                              Bedankt om deze workshop te volgen, en <strong>proficiat</strong> met het resultaat! <span class="hooray">GREAT SUCCES 🎯</span><br><br>
-                              Jouw eindresultaat zou er nu zo moeten uitzien:
+                                Je spel toont nu een top 5-scorebord dat automatisch wordt bijgewerkt na elk spel. Je
+                                hebt een volledig werkende reaction game gebouwd — inclusief scoretelling, game
+                                over-logica en leaderboard. <br><br>
+                                Bedankt om deze workshop te volgen, en <strong>proficiat</strong> met het resultaat!
+                                <span class="hooray">GREAT SUCCES 🎯</span><br><br>
+                                Jouw eindresultaat zou er nu zo moeten uitzien:
                             </p>
                             <video autoplay muted loop>
-                              <source src="./src/assets/end-result-reaction-game.mp4" type="video/mp4">
+                                <source src="./src/assets/end-result-reaction-game.mp4" type="video/mp4">
                             </video>
-                          </li>
+                        </li>
 
                     </ol>
                 </li>
 
+                <li class="step">
+                    <h3 class="step__title">Stap 8 (optioneel): 💥 Nog moeilijker maken?</h3>
+                    <p class="step__text">
+                        Wil je het spel extra uitdagend maken? Laat de bal nog sneller bewegen door het minimale
+                        interval te verlagen. Standaard stopt het interval op 1000 milliseconden (1 seconde), maar je
+                        kunt dit aanpassen.
+                    </p>
 
+                    <ol class="step__item">
+                        <li class="step__content">
+                            <p class="step__text">
+                                Zoek in <code>main.js</code> naar deze regel in de <code>onBallClick()</code>-functie:
+                            </p>
+                            <pre class="language-js"><code>
+                  intervalDuration = Math.max(1000, intervalDuration - 200);
+                        </code></pre>
+                        </li>
 
+                        <li class="step__content">
+                            <p class="step__text">
+                                Verander de waarde <code>1000</code> naar <code>500</code> om toe te staan dat het
+                                interval daalt tot 500 milliseconden (een halve seconde):
+                            </p>
+                            <pre class="language-js"><code>
+                  intervalDuration = Math.max(500, intervalDuration - 200);
+                        </code></pre>
+                        </li>
 
+                        <li class="step__content">
+                            <p class="step__text">
+                                Wil je het nóg pittiger maken? Verlaag ook de animatiesnelheid van de bal. Zoek in de
+                                <code>moveBall()</code>-functie deze regel:
+                            </p>
+                            <pre class="language-js"><code>
+                  { duration: 1000, fill: "forwards" }
+                        </code></pre>
+                            <p class="step__text">
+                                En verander <code>1000</code> naar <code>600</code> milliseconden:
+                            </p>
+                            <pre class="language-js"><code>
+                  { duration: 600, fill: "forwards" }
+                        </code></pre>
+                        </li>
 
-
-
-
-
+                        <li class="step__content">
+                            <p class="step__text">
+                                Hoe lager de getallen, hoe sneller en moeilijker het spel. Experimenteer en daag jezelf
+                                uit!
+                            </p>
+                        </li>
+                    </ol>
+                </li>
             </ol>
-
-
         </section>
     </main>
 
+    <footer class="footer">
+        <p>© 2025 Workshop gemaakt door Zeger Schaeverbeke voor Arteveldehogeschool</p>
+    </footer>
 
     <script src="./src/scripts/main.js"></script>
 </body>
