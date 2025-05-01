@@ -347,6 +347,131 @@
                     </ol>
                 </li>
 
+                <li class="step">
+                    <h3 class="step__title">Stap 4: <span>Score bijhouden bij klikken</span></h3>
+                    <p>
+                        In deze stap voegen we een score toe aan je spel. Elke keer als je op de bal klikt, stijgt je
+                        score met 1. Klik je naast de bal, dan gaat er 1 punt af. De score wordt linksboven op het
+                        speelveld weergegeven.
+                    </p>
+
+                    <ol class="step__item">
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Vervang de huidige <code>&lt;main&gt;</code>-tag in je <code>index.html</code> met de
+                                onderstaande versie. Hiermee voegen we het score-element toe aan de pagina.
+                            </p>
+                            <pre class="language-html"><code>
+                  &lt;main class="board" id="board"&gt;
+                    &lt;div class="custom-cursor" id="custom-cursor"&gt;&lt;/div&gt;
+                    &lt;div class="ball" id="ball"&gt;&lt;/div&gt;
+                    &lt;p class="score" id="score"&gt;Score: 0&lt;/p&gt;
+                  &lt;/main&gt;
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Voeg de volgende CSS toe onderaan je <code>main.css</code>. Hiermee positioneer je de
+                                score linksboven op het speelveld.
+                            </p>
+                            <pre class="language-css"><code>
+                  .score {
+                    position: absolute;
+                    top: 1rem;
+                    left: 1rem;
+                    font-size: 2rem;
+                    font-weight: 700;
+                    color: black;
+                    pointer-events: none;
+                  }
+                        </code></pre>
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Verwijder de volledige inhoud van <code>main.js</code> en vervang deze door de
+                                onderstaande JavaScript-code. Hiermee houd je de score bij en blijft de aangepaste
+                                cursor actief.
+                            </p>
+                            <pre class="language-js"><code>
+                                let score = 0;
+                                
+                                function moveBall() {
+                                  const $ball = document.getElementById('ball');
+                                
+                                  const maxX = window.innerWidth - $ball.offsetWidth;
+                                  const maxY = window.innerHeight - $ball.offsetHeight;
+                                
+                                  const randomX = Math.random() * maxX;
+                                  const randomY = Math.random() * maxY;
+                                
+                                  $ball.getAnimations().forEach(animation => animation.cancel());
+                                
+                                  const animation = $ball.animate(
+                                    [
+                                      { transform: `translate(${randomX}px, ${randomY}px)` }
+                                    ],
+                                    { duration: 1000, fill: 'forwards' }
+                                  );
+                                
+                                  animation.onfinish = () => {
+                                    $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                                  };
+                                }
+                                
+                                function onBallClick(event) {
+                                  event.stopPropagation();
+                                  score += 1;
+                                  document.getElementById('score').innerText = `Score: ${score}`;
+                                  moveBall();
+                                }
+                                
+                                function onBackgroundClick() {
+                                  const $board = document.getElementById('board');
+                                  $board.animate(
+                                    [
+                                      { backgroundColor: 'red' },
+                                      { backgroundColor: 'rgb(203, 203, 203)' }
+                                    ],
+                                    { duration: 400, easing: 'ease-in-out' }
+                                  );
+                                  score -= 1;
+                                  document.getElementById('score').innerText = `Score: ${score}`;
+                                }
+                                
+                                function init() {
+                                  const $ball = document.getElementById('ball');
+                                  const $board = document.getElementById('board');
+                                
+                                  $ball.addEventListener('click', onBallClick);
+                                  $board.addEventListener('click', onBackgroundClick);
+                                
+                                  moveBall();
+                                }
+                                
+                                init();
+                                
+                                document.addEventListener("mousemove", (event) => {
+                                  const customCursor = document.getElementById("custom-cursor");
+                                  customCursor.style.left = `${event.clientX}px`;
+                                  customCursor.style.top = `${event.clientY}px`;
+                                });
+                                </code></pre>
+                                
+                        </li>
+
+                        <li class="step__content">
+                            <p class="step__text">
+                                Als je alles correct hebt ingevoerd, zie je nu linksboven je score staan. Klik je op de
+                                bal, dan stijgt je score. Klik je ernaast, dan daalt die. De aangepaste cursor werkt ook
+                                nog steeds. Goed gedaan!
+                            </p>
+                        </li>
+
+                    </ol>
+                </li>
 
 
 
