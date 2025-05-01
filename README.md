@@ -1,1 +1,22 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/OtCKnre3)
+# Reaction Game Workshop 🎯
+
+In deze workshop leer je stap voor stap hoe je een reaction game maakt met HTML, CSS en JavaScript.
+
+## 📚 Inhoud van de tutorial
+
+- Structuur van je projectmap opzetten
+- HTML-opbouw van het speelveld
+- Styling met CSS (bal, score, leaderboard)
+- JavaScript voor het verplaatsen van de bal
+- Scoreverwerking en interval-timer
+- Game over en herstart
+- Leaderboard (top 5 scores)
+- Optionele moeilijkheidsaanpassing
+
+## 🧪 Eindresultaat
+
+Aan het einde heb je een volledig werkende reaction game met score, game over melding en leaderboard.
+
+👉 Bekijk de live versie via **GitHub Pages**:  
+
+
