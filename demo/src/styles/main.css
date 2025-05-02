@@ -32,6 +32,16 @@ body {
   z-index: 500;
 }
 
+.score {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #262625;
+  pointer-events: none; 
+}
+
 .interval-timer {
   position: absolute;
   bottom: 1rem;
@@ -41,16 +51,6 @@ body {
   color: #262625;
   pointer-events: none;
   z-index: 900;
-}
-
-.score {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #262625;
-  pointer-events: none; 
 }
 
 .game-over {

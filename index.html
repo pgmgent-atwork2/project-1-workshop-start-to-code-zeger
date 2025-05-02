@@ -237,6 +237,7 @@
                     height: 50px;
                     background-color: blue;
                     border-radius: 50%;
+                    z-index: 500;
                   }
                         </code></pre>
             </li>
@@ -513,9 +514,9 @@
         <li class="step">
           <h3 class="step__title">Stap 5: Interval & moeilijkheidsgraad</h3>
           <p>
-            In deze stap maken we het spel spannender. Als de speler niet snel genoeg op de bal klikt, gaat
-            er een punt af en verschijnt de bal op een nieuwe plek. Elke correcte klik verkort het interval,
-            waardoor het spel steeds moeilijker wordt.
+            In deze stap bereiden we het spel voor op een dynamischere moeilijkheidsgraad.
+            Als de speler op de bal klikt, wordt het interval verkort, waardoor de bal sneller begint te bewegen.
+            Zo wordt het spel telkens een beetje moeilijker na elke juiste klik.
           </p>
 
           <ol class="step__item">
@@ -528,30 +529,61 @@
                 waardoor de bal sneller gaat bewegen naarmate je verder speelt.
               </p>
               <pre class="language-js"><code>
-                function onBallClick(event) {
-                  event.stopPropagation();
-                  isClicked = true;
-                  updateScore();
-                  updateIntervalDuration();
-                  moveBall();
-                  startInterval();
-                }
-                        </code></pre>
+        function onBallClick(event) {
+          event.stopPropagation();
+          isClicked = true;
+          clearInterval(intervalCountdown);
+          updateScore();
+          updateIntervalDuration();
+          startInterval();
+        }
+              </code></pre>
+            </li>
+
+            <li class="step__content">
+              <p class="step__text">
+                Voeg de onderstaande code toe binnen de <strong><code>&lt;main&gt;</code>-tag</strong> in
+                <code>index.html</code>.
+                Dit element toont het huidige interval. Let op: momenteel toont dit element enkel de visuele waarde.
+                In de volgende stap zullen we deze koppelen aan een game-overlogica wanneer de tijd verstreken is.
+              </p>
+              <pre class="language-html"><code>
+        &lt;div class=&quot;interval-timer&quot; id=&quot;interval-timer&quot;&gt;Interval: 4s&lt;/div&gt;
+              </code></pre>
+            </li>
+
+            <li class="step__content">
+              <p class="step__text">
+                Voeg de onderstaande <strong>CSS-code</strong> toe aan <code>main.css</code>.
+                Deze stijl zorgt ervoor dat het interval-element rechtsonder op het scherm wordt weergegeven.
+              </p>
+              <pre class="language-css"><code>
+        .interval-timer {
+          position: absolute;
+          bottom: 1rem;
+          right: 1rem;
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #262625;
+          pointer-events: none;
+          z-index: 900;
+        }
+              </code></pre>
             </li>
 
             <li class="step__content">
               <p class="step__text">
                 Als alles goed werkt, zie je nu dat het spel start zodra je voor het eerst op de bal
-                klikt. Vanaf dat moment zal de bal automatisch blijven bewegen als je niet snel genoeg
-                reageert. Wanneer je te laat bent of naast de bal klikt, verlies je een punt — maar de
-                score zal nooit onder nul zakken. Elke juiste klik maakt het spel moeilijker door het
-                interval met 200 milliseconden te verkorten. Zo wordt het steeds spannender!
+                klikt en wordt er een timer rechtsonder getoond die het huidige interval weergeeft.
+                Dit interval verandert bij elke juiste klik, maar heeft voorlopig nog geen effect op de speluitkomst.
+                In de volgende stap koppelen we deze timer aan een "game over"-bericht als je niet op tijd reageert.
               </p>
               <img src="./src/assets/videos/step-5-end-result.gif" alt="Voorbeeldweergave van het resultaat na stap 5">
             </li>
 
           </ol>
         </li>
+
 
         <li class="step">
           <h3 class="step__title">Stap 6: Game Over & Herstart</h3>
@@ -596,7 +628,7 @@
                     padding: 1rem 2rem;
                     border-radius: 10px;
                     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                    z-index: 10;
+                    z-index: 600;
                   }
                   
                   .game-over .end-score {
@@ -623,9 +655,9 @@
                   animateBoardFlash("red", "rgb(203, 203, 203)");
                   gameOver();
                 }
-
+                
                 function gameOver() {
-                  clearInterval(intervalId);
+                  clearInterval(intervalCountdown);
                   handleGameOverDisplay();
                   document.addEventListener("keydown", restartGame);
                 }
@@ -717,12 +749,12 @@
                 zodat de lijst direct zichtbaar is bij het starten van het spel.
               </p>
               <pre class="language-js"><code>
-            function gameOver() {
-              clearInterval(intervalId);
-              handleGameOverDisplay();
-              checkLeaderboard();
-              document.addEventListener("keydown", restartGame);
-            }
+                function gameOver() {
+                  clearInterval(intervalCountdown);
+                  handleGameOverDisplay();
+                  checkLeaderboard();
+                  document.addEventListener("keydown", restartGame);
+                }
             
             function init() {
               const $ball = document.getElementById("ball");
