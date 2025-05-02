@@ -2,129 +2,135 @@
 <html lang="nl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workshop make your own reaction game</title>
-    <link rel="stylesheet" href="./src/styles/main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop make your own reaction game</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+  <link rel="icon" type="image/png" href="/src/assets/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/src/assets/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/src/assets/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/src/assets/favicon/site.webmanifest" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 </head>
 
 <body>
-    <div class="custom-cursor" id="custom-cursor"></div>
-    <nav class="navbar">
-        <ul class="navbar__list">
-            <li><a href="#hero">Introductie</a></li>
-            <li><a href="#requirements">Benodigdheden</a></li>
-            <li><a href="#stappenplan">Stappenplan</a></li>
-        </ul>
-    </nav>
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <nav class="navbar">
+    <ul class="navbar__list">
+      <li><a href="#hero">Introductie</a></li>
+      <li><a href="#requirements">Benodigdheden</a></li>
+      <li><a href="#stappenplan">Stappenplan</a></li>
+    </ul>
+  </nav>
 
-    <main>
-        <section class="container container--hero" id="hero">
-            <h1>Workshop: Bouw je eigen reactiespel</h1>
-            <h3>
-                In deze workshop leer je stap voor stap hoe je onderstaand reactiespel bouwt met
-                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a>,
-                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a> en
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</a>.
-            </h3>
+  <main>
+    <section class="container container--hero" id="hero">
+      <h1>Workshop: Bouw je eigen reactiespel</h1>
+      <h3>
+        In deze workshop leer je stap voor stap hoe je onderstaand reactiespel bouwt met
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a>,
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a> en
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</a>.
+      </h3>
 
-            <img class="hero__video" src="./src/assets/videos/reaction-game.gif" alt="Reaction game preview">
-        </section>
+      <img class="hero__video" src="./src/assets/videos/reaction-game.gif" alt="Reaction game preview">
+    </section>
 
-        <section class="container" id="requirements">
-            <h2>Benodigdheden</h2>
-            <p>Om deze workshop te volgen heb je het volgende nodig:</p>
-            <ul class="requirements">
-                <li>Browser:
-                    <a href="https://www.google.com/chrome/" target="_blank">Chrome</a>,
-                    <a href="https://www.microsoft.com/edge" target="_blank">Edge</a>,
-                    <a href="https://www.mozilla.org/firefox/" target="_blank">Firefox</a>,
-                    <a href="https://www.apple.com/safari/" target="_blank">Safari</a>,
-                    <a href="https://arc.net/" target="_blank">Arc</a>
-                </li>
-                <li><a href="https://code.visualstudio.com/" target="_blank">VS Code</a></li>
-                <li>Live Server VS Code-extensie (zoek in de extensiemarkt van VS Code)
-                </li>
-                <img class="requirement__video" src="./src/assets/videos/install-live-server.gif" alt="Install Live Server">
-            </ul>
-        </section>
+    <section class="container" id="requirements">
+      <h2>Benodigdheden</h2>
+      <p>Om deze workshop te volgen heb je het volgende nodig:</p>
+      <ul class="requirements">
+        <li>Browser:
+          <a href="https://www.google.com/chrome/" target="_blank">Chrome</a>,
+          <a href="https://www.microsoft.com/edge" target="_blank">Edge</a>,
+          <a href="https://www.mozilla.org/firefox/" target="_blank">Firefox</a>,
+          <a href="https://www.apple.com/safari/" target="_blank">Safari</a>,
+          <a href="https://arc.net/" target="_blank">Arc</a>
+        </li>
+        <li><a href="https://code.visualstudio.com/" target="_blank">VS Code</a></li>
+        <li>Live Server VS Code-extensie (zoek in de extensiemarkt van VS Code)
+        </li>
+        <img class="requirement__video" src="./src/assets/videos/install-live-server.gif" alt="Install Live Server">
+      </ul>
+    </section>
 
-        <section class="container container--steps" id="stappenplan">
-            <h2>Stappenplan</h2>
-            <p>
-                In dit project ga je stap voor stap een <strong>reaction game</strong> bouwen met HTML, CSS en
-                JavaScript. Klik zo snel mogelijk op de bal wanneer die verschijnt. Elke juiste klik verhoogt je score
-                en versnelt het interval, waardoor het spel steeds uitdagender wordt. Maar let op: als je <strong>naast
-                    de bal klikt</strong> of <strong>te laat reageert</strong>, krijg je een <em>Game Over</em>-melding.
-                Aan het einde heb je een volledig werkend spel met scoretelling, een leaderboard en een overzicht van de
-                <strong>top 5 scores</strong>.
-            </p>
-            <ol class="steps">
-                <li class="step">
-                    <h3 class="step__title">Stap 1: Folderstructuur</span></h3>
-                    <p>In deze stap maak je een duidelijke en overzichtelijke mappenstructuur aan voor je project. Dit
-                        zorgt ervoor dat je bestanden logisch geordend zijn en je efficiënter kunt werken en je code
-                        beter kunt onderhouden.</p>
-                    <ol class="step__item">
-                        <li class="step__content">
-                            <p class="step__text">
-                                Maak een nieuwe map aan op je computer en geef deze de naam <code>reaction-game</code>
-                                (of kies een naam naar voorkeur). Open vervolgens VS Code en open daarin de zojuist
-                                aangemaakte map. Zie de video hieronder voor hulp.
-                            </p>
-                            <img src="./src/assets/videos/open-map-in-vs.gif" alt="Open map animation">
-                        </li>
+    <section class="container container--steps" id="stappenplan">
+      <h2>Stappenplan</h2>
+      <p>
+        In dit project ga je stap voor stap een <strong>reaction game</strong> bouwen met HTML, CSS en
+        JavaScript. Klik zo snel mogelijk op de bal wanneer die verschijnt. Elke juiste klik verhoogt je score
+        en versnelt het interval, waardoor het spel steeds uitdagender wordt. Maar let op: als je <strong>naast
+          de bal klikt</strong> of <strong>te laat reageert</strong>, krijg je een <em>Game Over</em>-melding.
+        Aan het einde heb je een volledig werkend spel met scoretelling, een leaderboard en een overzicht van de
+        <strong>top 5 scores</strong>.
+      </p>
+      <ol class="steps">
+        <li class="step">
+          <h3 class="step__title">Stap 1: Folderstructuur</span></h3>
+          <p>In deze stap maak je een duidelijke en overzichtelijke mappenstructuur aan voor je project. Dit
+            zorgt ervoor dat je bestanden logisch geordend zijn en je efficiënter kunt werken en je code
+            beter kunt onderhouden.</p>
+          <ol class="step__item">
+            <li class="step__content">
+              <p class="step__text">
+                Maak een nieuwe map aan op je computer en geef deze de naam <code>reaction-game</code>
+                (of kies een naam naar voorkeur). Open vervolgens VS Code en open daarin de zojuist
+                aangemaakte map. Zie de video hieronder voor hulp.
+              </p>
+              <img src="./src/assets/videos/open-map-in-vs.gif" alt="Open map animation">
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Maak in VS Code dezelfde folderstructuur na zoals weergegeven op de afbeelding. Klik
-                                daarvoor op het eerste icoontje rechts van de map <code>reaction-game</code> om een
-                                nieuw bestand aan te maken (zoals <code>index.html</code>, <code>main.js</code>,
-                                <code>main.css</code> en <code>reset.css</code>). Gebruik het tweede icoontje om nieuwe
-                                mappen aan te maken, zoals <code>src</code>, <code>scripts</code> en
-                                <code>styles</code>. Zorg ervoor dat elk bestand in de juiste map staat zoals in het
-                                voorbeeld.
-                            </p>
-                            <img src="./src/assets/images/folder-structure-reaction-game.webp" alt="">
-                        </li>
+            <li class="step__content">
+              <p class="step__text">
+                Maak in VS Code dezelfde folderstructuur na zoals weergegeven op de afbeelding. Klik
+                daarvoor op het eerste icoontje rechts van de map <code>reaction-game</code> om een
+                nieuw bestand aan te maken (zoals <code>index.html</code>, <code>main.js</code>,
+                <code>main.css</code> en <code>reset.css</code>). Gebruik het tweede icoontje om nieuwe
+                mappen aan te maken, zoals <code>src</code>, <code>scripts</code> en
+                <code>styles</code>. Zorg ervoor dat elk bestand in de juiste map staat zoals in het
+                voorbeeld.
+              </p>
+              <img src="./src/assets/images/folder-structure-reaction-game.webp" alt="">
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Start de Live Server door rechtsonder in de blauwe balk van VS Code te klikken op
-                                <strong>Go Live</strong>. Jouw standaardbrowser wordt automatisch geopend en je ziet een
-                                blanco webpagina verschijnen. Dit betekent dat alles goed is ingesteld en je klaar bent
-                                om te beginnen met bouwen!
-                            </p>
-                        </li>
-                    </ol>
-                </li>
+            <li class="step__content">
+              <p class="step__text">
+                Start de Live Server door rechtsonder in de blauwe balk van VS Code te klikken op
+                <strong>Go Live</strong>. Jouw standaardbrowser wordt automatisch geopend en je ziet een
+                blanco webpagina verschijnen. Dit betekent dat alles goed is ingesteld en je klaar bent
+                om te beginnen met bouwen!
+              </p>
+            </li>
+          </ol>
+        </li>
 
-                <li class="step">
-                    <h3 class="step__title">Stap 2: HTML & CSS</h3>
-                    <ol class="step__item">
+        <li class="step">
+          <h3 class="step__title">Stap 2: HTML & CSS</h3>
+          <ol class="step__item">
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Open het bestand <code>index.html</code> dat je in stap 1 hebt aangemaakt en plak de
-                                onderstaande HTML-code erin. Deze code vormt de basisstructuur van je webpagina en
-                                koppelt je CSS- en JavaScript-bestanden. Ook voegen we alvast de bal en de aangepaste
-                                cursor toe.
-                            </p>
-                            <pre class="language-html"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Open het bestand <code>index.html</code> dat je in stap 1 hebt aangemaakt en plak de
+                onderstaande HTML-code erin. Deze code vormt de basisstructuur van je webpagina en
+                koppelt je CSS- en JavaScript-bestanden. Ook voegen we alvast de bal en de aangepaste
+                cursor toe.
+              </p>
+              <pre class="language-html"><code>
                   &lt;!DOCTYPE html&gt;
                   &lt;html lang="en"&gt;
                   
@@ -149,14 +155,14 @@
                   
                   &lt;/html&gt;
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Open het bestand <code>reset.css</code> en plak de onderstaande code erin. Deze
-                                CSS-reset zorgt ervoor dat je layout er in elke browser consistent uitziet.
-                            </p>
-                            <pre class="language-css"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Open het bestand <code>reset.css</code> en plak de onderstaande code erin. Deze
+                CSS-reset zorgt ervoor dat je layout er in elke browser consistent uitziet.
+              </p>
+              <pre class="language-css"><code>
                   *, 
                   *::before, 
                   *::after {
@@ -190,14 +196,14 @@
                     overflow-wrap: break-word;
                   }
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Open het bestand <code>main.css</code> en plak de onderstaande CSS-code erin. Hiermee
-                                stijlen we de pagina, het speelveld, de bal en de aangepaste cursor.
-                            </p>
-                            <pre class="language-css"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Open het bestand <code>main.css</code> en plak de onderstaande CSS-code erin. Hiermee
+                stijlen we de pagina, het speelveld, de bal en de aangepaste cursor.
+              </p>
+              <pre class="language-css"><code>
                   @import url('./reset.css');
                   
                   body {
@@ -231,38 +237,38 @@
                     border-radius: 50%;
                   }
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Als je alle code correct hebt gekopieerd en geplakt in de juiste bestanden, zie je in je
-                                browser nu een pagina met een grijs speelveld, een blauwe bal in de linkerbovenhoek en
-                                een kleine oranje bal erboven. Er is momenteel nog geen cursor zichtbaar, maar geen zorgen: de oranje bal wordt straks jouw aangepaste cursor. Wanneer je op de
-                                bal klikt, gebeurt er nog niets. Dat gaan we toevoegen in de volgende stap!
-                            </p>
-                            <img src="./src/assets/images/step-1-finished.webp"
-                                alt="Voorbeeldweergave van het resultaat na stap 2">
-                        </li>
+            <li class="step__content">
+              <p class="step__text">
+                Als je alle code correct hebt gekopieerd en geplakt in de juiste bestanden, zie je in je
+                browser nu een pagina met een grijs speelveld, een blauwe bal in de linkerbovenhoek en
+                een kleine oranje bal erboven. Er is momenteel nog geen cursor zichtbaar, maar geen zorgen: de oranje
+                bal wordt straks jouw aangepaste cursor. Wanneer je op de
+                bal klikt, gebeurt er nog niets. Dat gaan we toevoegen in de volgende stap!
+              </p>
+              <img src="./src/assets/images/step-1-finished.webp" alt="Voorbeeldweergave van het resultaat na stap 2">
+            </li>
 
-                    </ol>
-                </li>
+          </ol>
+        </li>
 
-                <li class="step">
-                    <h3 class="step__title">Stap 3: Bal laten bewegen & aangepaste cursor activeren</h3>
-                    <p>
-                        In deze stap voeg je JavaScript toe om de bal te laten bewegen wanneer je erop klikt. Je
-                        gebruikt animaties om de bal vloeiend naar een willekeurige positie te verplaatsen. Ook wordt de
-                        aangepaste oranje cursor nu actief, zodat deze de beweging van je muis volgt. Als je naast de
-                        bal klikt, licht de achtergrond kort rood op als visuele feedback.
-                    </p>
+        <li class="step">
+          <h3 class="step__title">Stap 3: Bal laten bewegen & aangepaste cursor activeren</h3>
+          <p>
+            In deze stap voeg je JavaScript toe om de bal te laten bewegen wanneer je erop klikt. Je
+            gebruikt animaties om de bal vloeiend naar een willekeurige positie te verplaatsen. Ook wordt de
+            aangepaste oranje cursor nu actief, zodat deze de beweging van je muis volgt. Als je naast de
+            bal klikt, licht de achtergrond kort rood op als visuele feedback.
+          </p>
 
-                    <ol class="step__item">
-                        <li class="step__content">
-                            <p class="step__text">
-                                Open het bestand <code>main.js</code> en vervang de bestaande code met de onderstaande
-                                JavaScript. Sla het bestand op en vernieuw je browser om de werking te testen.
-                            </p>
-                            <pre class="language-js"><code>
+          <ol class="step__item">
+            <li class="step__content">
+              <p class="step__text">
+                Open het bestand <code>main.js</code> en vervang de bestaande code met de onderstaande
+                JavaScript. Sla het bestand op en vernieuw je browser om de werking te testen.
+              </p>
+              <pre class="language-js"><code>
                   function moveBall() {
                     const $ball = document.getElementById('ball');
                   
@@ -320,51 +326,50 @@
                     customCursor.style.top = `${event.clientY}px`;
                   });
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Als alles correct is ingevoerd, beweegt de bal nu automatisch naar een willekeurige
-                                positie en verplaatst hij telkens je erop klikt. De oranje cursor volgt je muis over het
-                                speelveld, en bij een klik naast de bal licht de achtergrond kort rood op. Alles werkt
-                                nu dynamisch dankzij JavaScript!
-                            </p>
-                            <img src="./src/assets/videos/step-3-end-result.gif"
-                            alt="Voorbeeldweergave van het resultaat na stap 3">
-                        </li>
-                    </ol>
-                </li>
+            <li class="step__content">
+              <p class="step__text">
+                Als alles correct is ingevoerd, beweegt de bal nu automatisch naar een willekeurige
+                positie en verplaatst hij telkens je erop klikt. De oranje cursor volgt je muis over het
+                speelveld, en bij een klik naast de bal licht de achtergrond kort rood op. Alles werkt
+                nu dynamisch dankzij JavaScript!
+              </p>
+              <img src="./src/assets/videos/step-3-end-result.gif" alt="Voorbeeldweergave van het resultaat na stap 3">
+            </li>
+          </ol>
+        </li>
 
-                <li class="step">
-                    <h3 class="step__title">Stap 4: Score bijhouden bij klikken</h3>
-                    <p>
-                        In deze stap voegen we een score toe aan je spel. Elke keer als je op de bal klikt, stijgt je
-                        score met 1. Klik je naast de bal, dan gaat er 1 punt af. De score wordt linksboven op het
-                        speelveld weergegeven.
-                    </p>
+        <li class="step">
+          <h3 class="step__title">Stap 4: Score bijhouden bij klikken</h3>
+          <p>
+            In deze stap voegen we een score toe aan je spel. Elke keer als je op de bal klikt, stijgt je
+            score met 1. Klik je naast de bal, dan gaat er 1 punt af. De score wordt linksboven op het
+            speelveld weergegeven.
+          </p>
 
-                    <ol class="step__item">
+          <ol class="step__item">
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Vervang de huidige <code>&lt;main&gt;</code>-tag in je <code>index.html</code> met de
-                                onderstaande versie. Hiermee voegen we het score-element toe aan de pagina.
-                            </p>
-                            <pre class="language-html"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Vervang de huidige <code>&lt;main&gt;</code>-tag in je <code>index.html</code> met de
+                onderstaande versie. Hiermee voegen we het score-element toe aan de pagina.
+              </p>
+              <pre class="language-html"><code>
                   &lt;main class="board" id="board"&gt;
                     &lt;div class="custom-cursor" id="custom-cursor"&gt;&lt;/div&gt;
                     &lt;div class="ball" id="ball"&gt;&lt;/div&gt;
                     &lt;p class="score" id="score"&gt;Score: 0&lt;/p&gt;
                   &lt;/main&gt;
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Voeg de volgende CSS toe onderaan je <code>main.css</code>. Hiermee positioneer je de
-                                score linksboven op het speelveld.
-                            </p>
-                            <pre class="language-css"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Voeg de volgende CSS toe onderaan je <code>main.css</code>. Hiermee positioneer je de
+                score linksboven op het speelveld.
+              </p>
+              <pre class="language-css"><code>
                   .score {
                     position: absolute;
                     top: 1rem;
@@ -375,15 +380,15 @@
                     pointer-events: none;
                   }
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Verwijder de volledige inhoud van <code>main.js</code> en vervang deze door de
-                                onderstaande JavaScript-code. Hiermee houd je de score bij en blijft de aangepaste
-                                cursor actief.
-                            </p>
-                            <pre class="language-js"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Verwijder de volledige inhoud van <code>main.js</code> en vervang deze door de
+                onderstaande JavaScript-code. Hiermee houd je de score bij en blijft de aangepaste
+                cursor actief.
+              </p>
+              <pre class="language-js"><code>
                                 let score = 0;
                                 
                                 function moveBall() {
@@ -448,38 +453,37 @@
                                 });
                                 </code></pre>
 
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Als je alles correct hebt ingevoerd, zie je nu linksboven je score staan. Klik je op de
-                                bal, dan stijgt je score. Klik je ernaast, dan daalt die. De aangepaste cursor werkt ook
-                                nog steeds. Goed gedaan!
-                            </p>
-                            <img src="./src/assets/videos/step-4-end-result.gif"
-                            alt="Voorbeeldweergave van het resultaat na stap 4">
-                        </li>
+            <li class="step__content">
+              <p class="step__text">
+                Als je alles correct hebt ingevoerd, zie je nu linksboven je score staan. Klik je op de
+                bal, dan stijgt je score. Klik je ernaast, dan daalt die. De aangepaste cursor werkt ook
+                nog steeds. Goed gedaan!
+              </p>
+              <img src="./src/assets/videos/step-4-end-result.gif" alt="Voorbeeldweergave van het resultaat na stap 4">
+            </li>
 
-                    </ol>
-                </li>
+          </ol>
+        </li>
 
-                <li class="step">
-                    <h3 class="step__title">Stap 5: Interval & moeilijkheidsgraad</h3>
-                    <p>
-                        In deze stap maken we het spel spannender. Als de speler niet snel genoeg op de bal klikt, gaat
-                        er een punt af en verschijnt de bal op een nieuwe plek. Elke correcte klik verkort het interval,
-                        waardoor het spel steeds moeilijker wordt.
-                    </p>
+        <li class="step">
+          <h3 class="step__title">Stap 5: Interval & moeilijkheidsgraad</h3>
+          <p>
+            In deze stap maken we het spel spannender. Als de speler niet snel genoeg op de bal klikt, gaat
+            er een punt af en verschijnt de bal op een nieuwe plek. Elke correcte klik verkort het interval,
+            waardoor het spel steeds moeilijker wordt.
+          </p>
 
-                    <ol class="step__item">
+          <ol class="step__item">
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Open het bestand <code>main.js</code> en vervang de bestaande code met de onderstaande
-                                versie. Hiermee voeg je een automatisch interval toe dat de bal laat verplaatsen als er
-                                niet op tijd wordt geklikt.
-                            </p>
-                            <pre class="language-js"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Open het bestand <code>main.js</code> en vervang de bestaande code met de onderstaande
+                versie. Hiermee voeg je een automatisch interval toe dat de bal laat verplaatsen als er
+                niet op tijd wordt geklikt.
+              </p>
+              <pre class="language-js"><code>
                   let score = 0;
                   let isClicked = false;
                   let intervalId;
@@ -569,53 +573,52 @@
                     customCursor.style.top = `${event.clientY}px`;
                   });
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Als alles goed werkt, zie je nu dat het spel start zodra je voor het eerst op de bal
-                                klikt. Vanaf dat moment zal de bal automatisch blijven bewegen als je niet snel genoeg
-                                reageert. Wanneer je te laat bent of naast de bal klikt, verlies je een punt — maar de
-                                score zal nooit onder nul zakken. Elke juiste klik maakt het spel moeilijker door het
-                                interval met 200 milliseconden te verkorten. Zo wordt het steeds spannender!
-                            </p>
-                            <img src="./src/assets/videos/step-5-end-result.gif"
-                            alt="Voorbeeldweergave van het resultaat na stap 5">
-                        </li>
+            <li class="step__content">
+              <p class="step__text">
+                Als alles goed werkt, zie je nu dat het spel start zodra je voor het eerst op de bal
+                klikt. Vanaf dat moment zal de bal automatisch blijven bewegen als je niet snel genoeg
+                reageert. Wanneer je te laat bent of naast de bal klikt, verlies je een punt — maar de
+                score zal nooit onder nul zakken. Elke juiste klik maakt het spel moeilijker door het
+                interval met 200 milliseconden te verkorten. Zo wordt het steeds spannender!
+              </p>
+              <img src="./src/assets/videos/step-5-end-result.gif" alt="Voorbeeldweergave van het resultaat na stap 5">
+            </li>
 
-                    </ol>
-                </li>
+          </ol>
+        </li>
 
-                <li class="step">
-                    <h3 class="step__title">Stap 6: Game Over & Herstart</h3>
-                    <p>
-                        In deze stap voeg je een <strong>Game Over-scherm</strong> toe dat verschijnt wanneer je naast
-                        de bal klikt of niet snel genoeg reageert. Het spel pauzeert, toont je eindscore en kan opnieuw
-                        worden gestart door op de spatiebalk te drukken.
-                    </p>
+        <li class="step">
+          <h3 class="step__title">Stap 6: Game Over & Herstart</h3>
+          <p>
+            In deze stap voeg je een <strong>Game Over-scherm</strong> toe dat verschijnt wanneer je naast
+            de bal klikt of niet snel genoeg reageert. Het spel pauzeert, toont je eindscore en kan opnieuw
+            worden gestart door op de spatiebalk te drukken.
+          </p>
 
-                    <ol class="step__item">
+          <ol class="step__item">
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Voeg de onderstaande HTML toe onderaan de <code>&lt;main&gt;</code>-tag in je
-                                <code>index.html</code>.
-                            </p>
-                            <pre class="language-html"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Voeg de onderstaande HTML toe onderaan de <code>&lt;main&gt;</code>-tag in je
+                <code>index.html</code>.
+              </p>
+              <pre class="language-html"><code>
                   &lt;div class="game-over" id="game-over" style="display: none;"&gt;
                     &lt;p class="end-score" id="end-score"&gt;Score: 0&lt;/p&gt;
                     &lt;p&gt;Game Over&lt;/p&gt;
                     &lt;p&gt;Press Space to Restart&lt;/p&gt;
                   &lt;/div&gt;
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Voeg onderstaande CSS toe aan <code>main.css</code> om het Game Over-scherm te stylen en
-                                het spel tijdelijk te blokkeren.
-                            </p>
-                            <pre class="language-css"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Voeg onderstaande CSS toe aan <code>main.css</code> om het Game Over-scherm te stylen en
+                het spel tijdelijk te blokkeren.
+              </p>
+              <pre class="language-css"><code>
                   .game-over {
                     position: absolute;
                     top: 50%;
@@ -641,14 +644,14 @@
                     pointer-events: none;
                   }
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Vervang nu de volledige inhoud van <code>main.js</code> met onderstaande code. Deze
-                                bevat de game-over logica en herstart het spel wanneer je op de spatiebalk drukt.
-                            </p>
-                            <pre class="language-js"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Vervang nu de volledige inhoud van <code>main.js</code> met onderstaande code. Deze
+                bevat de game-over logica en herstart het spel wanneer je op de spatiebalk drukt.
+              </p>
+              <pre class="language-js"><code>
                   let score = 0;
                   let isClicked = false;
                   let intervalId;
@@ -758,50 +761,49 @@
                     customCursor.style.top = `${event.clientY}px`;
                   });
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Als alles juist is ingesteld, verschijnt er nu een Game Over-scherm wanneer je naast de
-                                bal klikt of als je niet snel genoeg reageert. Je eindscore wordt getoond, en je kunt
-                                het spel herstarten door op de spatiebalk te drukken.
-                            </p>
-                            <img src="./src/assets/videos/step-6-end-result.gif"
-                            alt="Voorbeeldweergave van het resultaat na stap 5">
-                        </li>
+            <li class="step__content">
+              <p class="step__text">
+                Als alles juist is ingesteld, verschijnt er nu een Game Over-scherm wanneer je naast de
+                bal klikt of als je niet snel genoeg reageert. Je eindscore wordt getoond, en je kunt
+                het spel herstarten door op de spatiebalk te drukken.
+              </p>
+              <img src="./src/assets/videos/step-6-end-result.gif" alt="Voorbeeldweergave van het resultaat na stap 5">
+            </li>
 
-                    </ol>
-                </li>
+          </ol>
+        </li>
 
-                <li class="step">
-                    <h3 class="step__title">Stap 7: Leaderboard</h3>
-                    <p>
-                        In deze laatste stap voeg je een <strong>Leaderboard</strong> toe dat automatisch de vijf
-                        hoogste scores onthoudt. Zo kun je jezelf blijven uitdagen en proberen je vorige scores te
-                        verbeteren!
-                    </p>
+        <li class="step">
+          <h3 class="step__title">Stap 7: Leaderboard</h3>
+          <p>
+            In deze laatste stap voeg je een <strong>Leaderboard</strong> toe dat automatisch de vijf
+            hoogste scores onthoudt. Zo kun je jezelf blijven uitdagen en proberen je vorige scores te
+            verbeteren!
+          </p>
 
-                    <ol class="step__item">
+          <ol class="step__item">
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Voeg de onderstaande HTML toe in je <code>index.html</code>, net onder het score-element
-                                binnen de <code>&lt;main&gt;</code>-tag.
-                            </p>
-                            <pre class="language-html"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Voeg de onderstaande HTML toe in je <code>index.html</code>, net onder het score-element
+                binnen de <code>&lt;main&gt;</code>-tag.
+              </p>
+              <pre class="language-html"><code>
                   &lt;div class="leaderboard" id="leaderboard"&gt;
                     &lt;h3&gt;Top 5 Scores:&lt;/h3&gt;
                     &lt;ul id="leaderboard-list"&gt;&lt;/ul&gt;
                   &lt;/div&gt;
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Voeg deze CSS toe aan <code>main.css</code> om de leaderboard zichtbaar en goed
-                                gepositioneerd te maken.
-                            </p>
-                            <pre class="language-css"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Voeg deze CSS toe aan <code>main.css</code> om de leaderboard zichtbaar en goed
+                gepositioneerd te maken.
+              </p>
+              <pre class="language-css"><code>
                   .leaderboard {
                     position: absolute;
                     top: 4rem; 
@@ -829,15 +831,15 @@
                     display: block;
                   }
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Vervang de volledige inhoud van <code>main.js</code> met de onderstaande code. Die houdt
-                                bij of je score in de top 5 hoort, en toont automatisch de bijgewerkte lijst na elk
-                                spel.
-                            </p>
-                            <pre class="language-js"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Vervang de volledige inhoud van <code>main.js</code> met de onderstaande code. Die houdt
+                bij of je score in de top 5 hoort, en toont automatisch de bijgewerkte lijst na elk
+                spel.
+              </p>
+              <pre class="language-js"><code>
                   let score = 0;
                   let isClicked = false;
                   let intervalId;
@@ -976,84 +978,84 @@
                     customCursor.style.top = `${event.clientY}px`;
                   });
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Je spel toont nu een top 5-scorebord dat automatisch wordt bijgewerkt na elk spel. Je
-                                hebt een volledig werkende reaction game gebouwd — inclusief scoretelling, game
-                                over-logica en leaderboard. <br><br>
-                                Bedankt om deze workshop te volgen, en <strong>proficiat</strong> met het resultaat!
-                                <span class="hooray">GREAT SUCCES 🎯</span><br><br>
-                                Jouw eindresultaat zou er nu zo moeten uitzien:
-                            </p>
-                            <img src="./src/assets/videos/end-result-reaction-game.gif" alt="End result of the reaction game">
-                        </li>
+            <li class="step__content">
+              <p class="step__text">
+                Je spel toont nu een top 5-scorebord dat automatisch wordt bijgewerkt na elk spel. Je
+                hebt een volledig werkende reaction game gebouwd — inclusief scoretelling, game
+                over-logica en leaderboard. <br><br>
+                Bedankt om deze workshop te volgen, en <strong>proficiat</strong> met het resultaat!
+                <span class="hooray">GREAT SUCCES 🎯</span><br><br>
+                Jouw eindresultaat zou er nu zo moeten uitzien:
+              </p>
+              <img src="./src/assets/videos/end-result-reaction-game.gif" alt="End result of the reaction game">
+            </li>
 
-                    </ol>
-                </li>
+          </ol>
+        </li>
 
-                <li class="step">
-                    <h3 class="step__title">Stap 8 (optioneel): 💥 Nog moeilijker maken?</h3>
-                    <p class="step__text">
-                        Wil je het spel extra uitdagend maken? Laat de bal nog sneller bewegen door het minimale
-                        interval te verlagen. Standaard stopt het interval op 1000 milliseconden (1 seconde), maar je
-                        kunt dit aanpassen.
-                    </p>
+        <li class="step">
+          <h3 class="step__title">Stap 8 (optioneel): 💥 Nog moeilijker maken?</h3>
+          <p class="step__text">
+            Wil je het spel extra uitdagend maken? Laat de bal nog sneller bewegen door het minimale
+            interval te verlagen. Standaard stopt het interval op 1000 milliseconden (1 seconde), maar je
+            kunt dit aanpassen.
+          </p>
 
-                    <ol class="step__item">
-                        <li class="step__content">
-                            <p class="step__text">
-                                Zoek in <code>main.js</code> naar deze regel in de <code>onBallClick()</code>-functie:
-                            </p>
-                            <pre class="language-js"><code>
+          <ol class="step__item">
+            <li class="step__content">
+              <p class="step__text">
+                Zoek in <code>main.js</code> naar deze regel in de <code>onBallClick()</code>-functie:
+              </p>
+              <pre class="language-js"><code>
                   intervalDuration = Math.max(1000, intervalDuration - 200);
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Verander de waarde <code>1000</code> naar <code>500</code> om toe te staan dat het
-                                interval daalt tot 500 milliseconden (een halve seconde):
-                            </p>
-                            <pre class="language-js"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Verander de waarde <code>1000</code> naar <code>500</code> om toe te staan dat het
+                interval daalt tot 500 milliseconden (een halve seconde):
+              </p>
+              <pre class="language-js"><code>
                   intervalDuration = Math.max(500, intervalDuration - 200);
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Wil je het nóg pittiger maken? Verlaag ook de animatiesnelheid van de bal. Zoek in de
-                                <code>moveBall()</code>-functie deze regel:
-                            </p>
-                            <pre class="language-js"><code>
+            <li class="step__content">
+              <p class="step__text">
+                Wil je het nóg pittiger maken? Verlaag ook de animatiesnelheid van de bal. Zoek in de
+                <code>moveBall()</code>-functie deze regel:
+              </p>
+              <pre class="language-js"><code>
                   { duration: 1000, fill: "forwards" }
                         </code></pre>
-                            <p class="step__text">
-                                En verander <code>1000</code> naar <code>600</code> milliseconden:
-                            </p>
-                            <pre class="language-js"><code>
+              <p class="step__text">
+                En verander <code>1000</code> naar <code>600</code> milliseconden:
+              </p>
+              <pre class="language-js"><code>
                   { duration: 600, fill: "forwards" }
                         </code></pre>
-                        </li>
+            </li>
 
-                        <li class="step__content">
-                            <p class="step__text">
-                                Hoe lager de getallen, hoe sneller en moeilijker het spel. Experimenteer en daag jezelf
-                                uit!
-                            </p>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-        </section>
-    </main>
+            <li class="step__content">
+              <p class="step__text">
+                Hoe lager de getallen, hoe sneller en moeilijker het spel. Experimenteer en daag jezelf
+                uit!
+              </p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </section>
+  </main>
 
-    <footer class="footer">
-        <p>© 2025 Workshop gemaakt door Zeger Schaeverbeke voor Arteveldehogeschool</p>
-    </footer>
+  <footer class="footer">
+    <p>© 2025 Workshop gemaakt door Zeger Schaeverbeke voor Arteveldehogeschool</p>
+  </footer>
 
-    <script src="./src/scripts/main.js"></script>
+  <script src="./src/scripts/main.js"></script>
 </body>
 
 </html>
