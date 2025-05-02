@@ -1,11 +1,11 @@
 let score = 0;
 let isClicked = false;
-let intervalId;
 let intervalDuration = 4000;
+let intervalCountdown;
 
 let leaderboard = [0, 0, 0, 0, 0];
 
-function moveBall() {
+function moveBall(onFinish) {
   const $ball = document.getElementById("ball");
 
   const maxX = window.innerWidth - $ball.offsetWidth;
@@ -14,15 +14,12 @@ function moveBall() {
   const randomX = Math.random() * maxX;
   const randomY = Math.random() * maxY;
 
-  $ball.getAnimations().forEach((animation) => animation.cancel());
-
-  const animation = $ball.animate(
+  $ball.animate(
     [{ transform: `translate(${randomX}px, ${randomY}px)` }],
     { duration: 1000, fill: "forwards" }
-  );
-
-  animation.onfinish = () => {
+  ).onfinish = () => {
     $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    onFinish?.();
   };
 }
 
@@ -46,18 +43,33 @@ function decreaseScore() {
 
 function updateIntervalDuration() {
   intervalDuration = Math.max(1000, intervalDuration - 200);
-  console.log(`Interval Duration Updated: ${intervalDuration}ms`);
 }
 
 function startInterval() {
-  clearInterval(intervalId);
-  intervalId = setInterval(() => {
-    if (!isClicked) {
+
+  moveBall(() => {
+    clearInterval(intervalCountdown);
+    startIntervalTimer();
+  });
+}
+
+function startIntervalTimer() {
+  clearInterval(intervalCountdown);
+
+  const $intervalTimer = document.getElementById("interval-timer");
+  let timeLeft = intervalDuration;
+  $intervalTimer.innerText = `Interval: ${(timeLeft / 1000).toFixed(2)}s`;
+
+  intervalCountdown = setInterval(() => {
+    timeLeft -= 10;
+    if (timeLeft < 0) timeLeft = 0;
+    $intervalTimer.innerText = `Interval: ${(timeLeft / 1000).toFixed(2)}s`;
+
+    if (timeLeft <= 0) {
+      clearInterval(intervalCountdown);
       gameOver();
-    } else {
-      isClicked = false;
     }
-  }, intervalDuration);
+  }, 10);
 }
 
 function handleGameRestart() {
@@ -71,25 +83,14 @@ function handleGameRestart() {
   document.getElementById("score").innerText = `Score: ${score}`;
   updateLeaderboard();
   moveBall();
+  startIntervalTimer();
 }
 
 function updateLeaderboard() {
   const $leaderboardList = document.getElementById("leaderboard-list");
-  $leaderboardList.innerHTML = "";
-
-  leaderboard.forEach((score, index) => {
-    const li = document.createElement("li");
-
-    const rankSpan = document.createElement("span");
-    rankSpan.textContent = `${index + 1}`;
-
-    const scoreSpan = document.createElement("span");
-    scoreSpan.textContent = score;
-
-    li.appendChild(rankSpan);
-    li.appendChild(scoreSpan);
-    $leaderboardList.appendChild(li);
-  });
+  $leaderboardList.innerHTML = leaderboard
+    .map((score, index) => `<li><span>${index + 1}</span><span>${score}</span></li>`)
+    .join('');
 }
 
 function checkLeaderboard() {

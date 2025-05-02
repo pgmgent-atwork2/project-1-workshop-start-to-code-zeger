@@ -29,6 +29,18 @@ body {
   height: 50px;
   background-color: blue;
   border-radius: 50%;
+  z-index: 500;
+}
+
+.interval-timer {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #262625;
+  pointer-events: none;
+  z-index: 900;
 }
 
 .score {
@@ -54,7 +66,7 @@ body {
   padding: 1rem 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  z-index: 600;
 
   & .end-score {
     color: #262625;

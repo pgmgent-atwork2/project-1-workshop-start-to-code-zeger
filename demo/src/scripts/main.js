@@ -1,9 +1,9 @@
 function onBallClick(event) {
   event.stopPropagation();
   isClicked = true;
+  clearInterval(intervalCountdown);
   updateScore();
   updateIntervalDuration();
-  moveBall();
   startInterval();
 }
 
@@ -13,7 +13,7 @@ function onBackgroundClick() {
 }
 
 function gameOver() {
-  clearInterval(intervalId);
+  clearInterval(intervalCountdown);
   handleGameOverDisplay();
   checkLeaderboard();
   document.addEventListener("keydown", restartGame);
