@@ -131,30 +131,32 @@
                 cursor toe.
               </p>
               <pre class="language-html"><code>
-                  &lt;!DOCTYPE html&gt;
-                  &lt;html lang="en"&gt;
-                  
-                  &lt;head&gt;
-                    &lt;meta charset="UTF-8"&gt;
-                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-                    &lt;title&gt;Reaction game&lt;/title&gt;
-                    &lt;link rel="stylesheet" href="./src/styles/main.css"&gt;
-                    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
-                    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
-                    &lt;link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"&gt;
-                  &lt;/head&gt;
-                  
-                  &lt;body&gt;
-                    &lt;main class="board" id="board"&gt;
-                      &lt;div class="custom-cursor" id="custom-cursor"&gt;&lt;/div&gt;
-                      &lt;div class="ball" id="ball"&gt;&lt;/div&gt;
-                    &lt;/main&gt;
-                  
-                    &lt;script src="./src/scripts/main.js"&gt;&lt;/script&gt;
-                  &lt;/body&gt;
-                  
-                  &lt;/html&gt;
-                        </code></pre>
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang=&quot;en&quot;&gt;
+                
+                &lt;head&gt;
+                  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+                  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+                  &lt;title&gt;Reaction game&lt;/title&gt;
+                
+                  &lt;link rel=&quot;stylesheet&quot; href=&quot;./src/styles/main.css&quot; /&gt;
+                  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot; /&gt;
+                  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin /&gt;
+                  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
+                &lt;/head&gt;
+                
+                &lt;body&gt;
+                  &lt;main class=&quot;board&quot; id=&quot;board&quot;&gt;
+                    &lt;div class=&quot;custom-cursor&quot; id=&quot;custom-cursor&quot;&gt;&lt;/div&gt;
+                    &lt;div class=&quot;ball&quot; id=&quot;ball&quot;&gt;&lt;/div&gt;
+                  &lt;/main&gt;
+                
+                  &lt;script src=&quot;./src/scripts/function.js&quot;&gt;&lt;/script&gt;
+                  &lt;script src=&quot;./src/scripts/main.js&quot;&gt;&lt;/script&gt;
+                &lt;/body&gt;
+                
+                &lt;/html&gt;
+                </code></pre>
             </li>
 
             <li class="step__content">
@@ -248,12 +250,12 @@
               <pre class="language-js"><code>
                 let score = 0;
                 let isClicked = false;
-                let intervalId;
                 let intervalDuration = 4000;
+                let intervalCountdown;
                 
                 let leaderboard = [0, 0, 0, 0, 0];
                 
-                function moveBall() {
+                function moveBall(onFinish) {
                   const $ball = document.getElementById("ball");
                 
                   const maxX = window.innerWidth - $ball.offsetWidth;
@@ -262,15 +264,12 @@
                   const randomX = Math.random() * maxX;
                   const randomY = Math.random() * maxY;
                 
-                  $ball.getAnimations().forEach((animation) => animation.cancel());
-                
-                  const animation = $ball.animate(
+                  $ball.animate(
                     [{ transform: `translate(${randomX}px, ${randomY}px)` }],
                     { duration: 1000, fill: "forwards" }
-                  );
-                
-                  animation.onfinish = () => {
+                  ).onfinish = () => {
                     $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                    onFinish?.();
                   };
                 }
                 
@@ -294,18 +293,33 @@
                 
                 function updateIntervalDuration() {
                   intervalDuration = Math.max(1000, intervalDuration - 200);
-                  console.log(`Interval Duration Updated: ${intervalDuration}ms`);
                 }
                 
                 function startInterval() {
-                  clearInterval(intervalId);
-                  intervalId = setInterval(() => {
-                    if (!isClicked) {
+                
+                  moveBall(() => {
+                    clearInterval(intervalCountdown);
+                    startIntervalTimer();
+                  });
+                }
+                
+                function startIntervalTimer() {
+                  clearInterval(intervalCountdown);
+                
+                  const $intervalTimer = document.getElementById("interval-timer");
+                  let timeLeft = intervalDuration;
+                  $intervalTimer.innerText = `Interval: ${(timeLeft / 1000).toFixed(2)}s`;
+                
+                  intervalCountdown = setInterval(() => {
+                    timeLeft -= 10;
+                    if (timeLeft < 0) timeLeft = 0;
+                    $intervalTimer.innerText = `Interval: ${(timeLeft / 1000).toFixed(2)}s`;
+                
+                    if (timeLeft <= 0) {
+                      clearInterval(intervalCountdown);
                       gameOver();
-                    } else {
-                      isClicked = false;
                     }
-                  }, intervalDuration);
+                  }, 10);
                 }
                 
                 function handleGameRestart() {
@@ -319,25 +333,14 @@
                   document.getElementById("score").innerText = `Score: ${score}`;
                   updateLeaderboard();
                   moveBall();
+                  startIntervalTimer();
                 }
                 
                 function updateLeaderboard() {
                   const $leaderboardList = document.getElementById("leaderboard-list");
-                  $leaderboardList.innerHTML = "";
-                
-                  leaderboard.forEach((score, index) => {
-                    const li = document.createElement("li");
-                
-                    const rankSpan = document.createElement("span");
-                    rankSpan.textContent = `${index + 1}`;
-                
-                    const scoreSpan = document.createElement("span");
-                    scoreSpan.textContent = score;
-                
-                    li.appendChild(rankSpan);
-                    li.appendChild(scoreSpan);
-                    $leaderboardList.appendChild(li);
-                  });
+                  $leaderboardList.innerHTML = leaderboard
+                    .map((score, index) => `<li><span>${index + 1}</span><span>${score}</span></li>`)
+                    .join('');
                 }
                 
                 function checkLeaderboard() {
