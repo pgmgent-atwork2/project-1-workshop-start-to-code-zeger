@@ -105,7 +105,7 @@
                 <code>styles</code>. Zorg ervoor dat elk bestand in de juiste map staat zoals in het
                 voorbeeld.
               </p>
-              <img src="./src/assets/images/folder-structure-reaction-game.webp" alt="">
+              <img src="./src/assets/images/tutorial-folder-structure.webp" alt="">
             </li>
 
             <li class="step__content">
@@ -120,7 +120,7 @@
         </li>
 
         <li class="step">
-          <h3 class="step__title">Stap 2: HTML & CSS</h3>
+          <h3 class="step__title">Stap 2: HTML, CSS & JS</h3>
           <ol class="step__item">
 
             <li class="step__content">
@@ -238,13 +238,140 @@
                   }
                         </code></pre>
             </li>
+            <li class="step__content">
+              <p class="step__text">
+                Open het bestand <code>function.js</code> en plak de onderstaande JavaScript-code erin.
+                Dit bestand bevat <strong>alle functies</strong> die we zullen gebruiken in het spel,
+                zoals het herstarten van het spel, het tonen van het game-over scherm,
+                het bijwerken van de score en het leaderboard, en het animeren van het speelbord.
+              </p>
+              <pre class="language-js"><code>
+                let score = 0;
+                let isClicked = false;
+                let intervalId;
+                let intervalDuration = 4000;
+                
+                let leaderboard = [0, 0, 0, 0, 0];
+                
+                function moveBall() {
+                  const $ball = document.getElementById("ball");
+                
+                  const maxX = window.innerWidth - $ball.offsetWidth;
+                  const maxY = window.innerHeight - $ball.offsetHeight;
+                
+                  const randomX = Math.random() * maxX;
+                  const randomY = Math.random() * maxY;
+                
+                  $ball.getAnimations().forEach((animation) => animation.cancel());
+                
+                  const animation = $ball.animate(
+                    [{ transform: `translate(${randomX}px, ${randomY}px)` }],
+                    { duration: 1000, fill: "forwards" }
+                  );
+                
+                  animation.onfinish = () => {
+                    $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                  };
+                }
+                
+                function animateBoardFlash(colorStart, colorEnd, duration = 400) {
+                  const $board = document.getElementById("board");
+                  $board.animate(
+                    [{ backgroundColor: colorStart }, { backgroundColor: colorEnd }],
+                    { duration, easing: "ease-in-out" }
+                  );
+                }
+                
+                function updateScore() {
+                  score += 1;
+                  document.getElementById("score").innerText = `Score: ${score}`;
+                }
+                
+                function decreaseScore() {
+                  score -= 1;
+                  document.getElementById("score").innerText = `Score: ${score}`;
+                }
+                
+                function updateIntervalDuration() {
+                  intervalDuration = Math.max(1000, intervalDuration - 200);
+                  console.log(`Interval Duration Updated: ${intervalDuration}ms`);
+                }
+                
+                function startInterval() {
+                  clearInterval(intervalId);
+                  intervalId = setInterval(() => {
+                    if (!isClicked) {
+                      gameOver();
+                    } else {
+                      isClicked = false;
+                    }
+                  }, intervalDuration);
+                }
+                
+                function handleGameRestart() {
+                  const $gameOver = document.getElementById("game-over");
+                  const $board = document.getElementById("board");
+                
+                  $gameOver.style.display = "none";
+                  $board.classList.remove("disabled");
+                  score = 0;
+                  intervalDuration = 4000;
+                  document.getElementById("score").innerText = `Score: ${score}`;
+                  updateLeaderboard();
+                  moveBall();
+                }
+                
+                function updateLeaderboard() {
+                  const $leaderboardList = document.getElementById("leaderboard-list");
+                  $leaderboardList.innerHTML = "";
+                
+                  leaderboard.forEach((score, index) => {
+                    const li = document.createElement("li");
+                
+                    const rankSpan = document.createElement("span");
+                    rankSpan.textContent = `${index + 1}`;
+                
+                    const scoreSpan = document.createElement("span");
+                    scoreSpan.textContent = score;
+                
+                    li.appendChild(rankSpan);
+                    li.appendChild(scoreSpan);
+                    $leaderboardList.appendChild(li);
+                  });
+                }
+                
+                function checkLeaderboard() {
+                  if (score > leaderboard[4]) {
+                    leaderboard.push(score);
+                    leaderboard.sort((a, b) => b - a);
+                    leaderboard = leaderboard.slice(0, 5);
+                    updateLeaderboard();
+                  }
+                }
+                
+                function handleGameOverDisplay() {
+                  const $gameOver = document.getElementById("game-over");
+                  const $board = document.getElementById("board");
+                
+                  $gameOver.style.display = "block";
+                  $board.classList.add("disabled");
+                  document.getElementById("end-score").innerText = `Score: ${score}`;
+                }
+                
+                
+                document.addEventListener("mousemove", (event) => {
+                  const customCursor = document.getElementById("custom-cursor");
+                  customCursor.style.left = `${event.clientX}px`;
+                  customCursor.style.top = `${event.clientY}px`;
+                });
+                      </code></pre>
+            </li>
 
             <li class="step__content">
               <p class="step__text">
                 Als je alle code correct hebt gekopieerd en geplakt in de juiste bestanden, zie je in je
-                browser nu een pagina met een grijs speelveld, een blauwe bal in de linkerbovenhoek en
-                een kleine oranje bal erboven. Er is momenteel nog geen cursor zichtbaar, maar geen zorgen: de oranje
-                bal wordt straks jouw aangepaste cursor. Wanneer je op de
+                browser nu een pagina met een grijs speelveld, een blauwe bal in de linkerbovenhoek en een oranje bal
+                als cursor. Wanneer je op de
                 bal klikt, gebeurt er nog niets. Dat gaan we toevoegen in de volgende stap!
               </p>
               <img src="./src/assets/images/step-1-finished.webp" alt="Voorbeeldweergave van het resultaat na stap 2">
@@ -254,7 +381,7 @@
         </li>
 
         <li class="step">
-          <h3 class="step__title">Stap 3: Bal laten bewegen & aangepaste cursor activeren</h3>
+          <h3 class="step__title">Stap 3: Bal laten bewegen</h3>
           <p>
             In deze stap voeg je JavaScript toe om de bal te laten bewegen wanneer je erop klikt. Je
             gebruikt animaties om de bal vloeiend naar een willekeurige positie te verplaatsen. Ook wordt de
@@ -265,66 +392,30 @@
           <ol class="step__item">
             <li class="step__content">
               <p class="step__text">
-                Open het bestand <code>main.js</code> en vervang de bestaande code met de onderstaande
-                JavaScript. Sla het bestand op en vernieuw je browser om de werking te testen.
+                Open het bestand <code>main.js</code> en plaats onderstaande code hierin. Sla het bestand op en vernieuw
+                je browser om de werking te testen (Normaal gaat dit automatisch met live server).
               </p>
               <pre class="language-js"><code>
-                  function moveBall() {
-                    const $ball = document.getElementById('ball');
-                  
-                    const maxX = window.innerWidth - $ball.offsetWidth;
-                    const maxY = window.innerHeight - $ball.offsetHeight;
-                  
-                    const randomX = Math.random() * maxX;
-                    const randomY = Math.random() * maxY;
-                  
-                    $ball.getAnimations().forEach(animation => animation.cancel());
-                  
-                    const animation = $ball.animate(
-                      [
-                        { transform: `translate(${randomX}px, ${randomY}px)` }
-                      ],
-                      { duration: 1000, fill: 'forwards' }
-                    );
-                  
-                    animation.onfinish = () => {
-                      $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                    };
-                  }
-                  
-                  function onBallClick(event) {
-                    event.stopPropagation();
-                    moveBall();
-                  }
-                  
-                  function onBackgroundClick() {
-                    const $board = document.getElementById('board');
-                    $board.animate(
-                      [
-                        { backgroundColor: 'red' },
-                        { backgroundColor: 'rgb(203, 203, 203)' }
-                      ],
-                      { duration: 400, easing: 'ease-in-out' }
-                    );
-                  }
-                  
-                  function init() {
-                    const $ball = document.getElementById('ball');
-                    const $board = document.getElementById('board');
-                  
-                    $ball.addEventListener('click', onBallClick);
-                    $board.addEventListener('click', onBackgroundClick);
-                  
-                    moveBall();
-                  }
-                  
-                  init();
-                  
-                  document.addEventListener("mousemove", (event) => {
-                    const customCursor = document.getElementById("custom-cursor");
-                    customCursor.style.left = `${event.clientX}px`;
-                    customCursor.style.top = `${event.clientY}px`;
-                  });
+                function onBallClick(event) {
+                  event.stopPropagation();
+                  moveBall();
+                }
+                
+                function onBackgroundClick() {
+                  animateBoardFlash("red", "rgb(203, 203, 203)");
+                }
+
+                function init() {
+                  const $ball = document.getElementById("ball");
+                  const $board = document.getElementById("board");
+                
+                  $ball.addEventListener("click", onBallClick);
+                  $board.addEventListener("click", onBackgroundClick);
+                
+                  moveBall();
+                }
+                
+                init();
                         </code></pre>
             </li>
 
@@ -384,73 +475,22 @@
 
             <li class="step__content">
               <p class="step__text">
-                Verwijder de volledige inhoud van <code>main.js</code> en vervang deze door de
-                onderstaande JavaScript-code. Hiermee houd je de score bij en blijft de aangepaste
-                cursor actief.
+                Pas nu enkel de <strong>inhoud van de functies</strong> <code>onBallClick</code> en
+                <code>onBackgroundClick</code> aan zoals hieronder weergegeven.
+                Je hoeft de rest van <code>main.js</code> niet te wijzigen.
+                Hiermee wordt de score correct bijgewerkt.
               </p>
               <pre class="language-js"><code>
-                                let score = 0;
-                                
-                                function moveBall() {
-                                  const $ball = document.getElementById('ball');
-                                
-                                  const maxX = window.innerWidth - $ball.offsetWidth;
-                                  const maxY = window.innerHeight - $ball.offsetHeight;
-                                
-                                  const randomX = Math.random() * maxX;
-                                  const randomY = Math.random() * maxY;
-                                
-                                  $ball.getAnimations().forEach(animation => animation.cancel());
-                                
-                                  const animation = $ball.animate(
-                                    [
-                                      { transform: `translate(${randomX}px, ${randomY}px)` }
-                                    ],
-                                    { duration: 1000, fill: 'forwards' }
-                                  );
-                                
-                                  animation.onfinish = () => {
-                                    $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                                  };
-                                }
-                                
-                                function onBallClick(event) {
-                                  event.stopPropagation();
-                                  score += 1;
-                                  document.getElementById('score').innerText = `Score: ${score}`;
-                                  moveBall();
-                                }
-                                
-                                function onBackgroundClick() {
-                                  const $board = document.getElementById('board');
-                                  $board.animate(
-                                    [
-                                      { backgroundColor: 'red' },
-                                      { backgroundColor: 'rgb(203, 203, 203)' }
-                                    ],
-                                    { duration: 400, easing: 'ease-in-out' }
-                                  );
-                                  score -= 1;
-                                  document.getElementById('score').innerText = `Score: ${score}`;
-                                }
-                                
-                                function init() {
-                                  const $ball = document.getElementById('ball');
-                                  const $board = document.getElementById('board');
-                                
-                                  $ball.addEventListener('click', onBallClick);
-                                  $board.addEventListener('click', onBackgroundClick);
-                                
-                                  moveBall();
-                                }
-                                
-                                init();
-                                
-                                document.addEventListener("mousemove", (event) => {
-                                  const customCursor = document.getElementById("custom-cursor");
-                                  customCursor.style.left = `${event.clientX}px`;
-                                  customCursor.style.top = `${event.clientY}px`;
-                                });
+                function onBallClick(event) {
+                  event.stopPropagation();
+                  updateScore();
+                  moveBall();
+                }
+                
+                function onBackgroundClick() {
+                  animateBoardFlash("red", "rgb(203, 203, 203)");
+                  decreaseScore()
+                }
                                 </code></pre>
 
             </li>
@@ -479,99 +519,20 @@
 
             <li class="step__content">
               <p class="step__text">
-                Open het bestand <code>main.js</code> en vervang de bestaande code met de onderstaande
-                versie. Hiermee voeg je een automatisch interval toe dat de bal laat verplaatsen als er
-                niet op tijd wordt geklikt.
+                Pas enkel de <strong>inhoud van de functie</strong> <code>onBallClick</code> aan zoals hieronder.
+                Je hoeft de rest van <code>main.js</code> niet te wijzigen.
+                Met deze update wordt er automatisch een nieuw interval gestart wanneer er op de bal wordt geklikt,
+                waardoor de bal sneller gaat bewegen naarmate je verder speelt.
               </p>
               <pre class="language-js"><code>
-                  let score = 0;
-                  let isClicked = false;
-                  let intervalId;
-                  let intervalDuration = 4000;
-                  
-                  function moveBall() {
-                    const $ball = document.getElementById('ball');
-                  
-                    const maxX = window.innerWidth - $ball.offsetWidth;
-                    const maxY = window.innerHeight - $ball.offsetHeight;
-                  
-                    const randomX = Math.random() * maxX;
-                    const randomY = Math.random() * maxY;
-                  
-                    $ball.getAnimations().forEach(animation => animation.cancel());
-                  
-                    const animation = $ball.animate(
-                      [
-                        { transform: `translate(${randomX}px, ${randomY}px)` }
-                      ],
-                      { duration: 1000, fill: 'forwards' }
-                    );
-                  
-                    animation.onfinish = () => {
-                      $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                    };
-                  }
-                  
-                  function startInterval() {
-                    clearInterval(intervalId);
-                    intervalId = setInterval(() => {
-                      if (!isClicked) {
-                        if (score > 0) {
-                          score -= 1;
-                        }
-                        document.getElementById('score').innerText = `Score: ${score}`;
-                        moveBall();
-                      } else {
-                        isClicked = false;
-                      }
-                    }, intervalDuration);
-                  }
-                  
-                  function onBallClick(event) {
-                    event.stopPropagation();
-                    isClicked = true;
-                    score += 1;
-                    document.getElementById('score').innerText = `Score: ${score}`;
-                  
-                    intervalDuration = Math.max(1000, intervalDuration - 200);
-                    console.log(`Interval Duration Updated: ${intervalDuration}ms`);
-                  
-                    moveBall();
-                    startInterval();
-                  }
-                  
-                  function onBackgroundClick() {
-                    const $board = document.getElementById('board');
-                    $board.animate(
-                      [
-                        { backgroundColor: 'red' },
-                        { backgroundColor: 'rgb(203, 203, 203)' }
-                      ],
-                      { duration: 400, easing: 'ease-in-out' }
-                    );
-                    if (score > 0) {
-                      score -= 1;
-                    }
-                    document.getElementById('score').innerText = `Score: ${score}`;
-                  }
-                  
-                  function init() {
-                    const $ball = document.getElementById('ball');
-                    const $board = document.getElementById('board');
-                  
-                    $ball.addEventListener('click', onBallClick);
-                    $board.addEventListener('click', onBackgroundClick);
-                  
-                    moveBall();
-                  }
-                  
-                  init();
-                  
-                  document.addEventListener("mousemove", (event) => {
-                    const customCursor = document.getElementById("custom-cursor");
-                    customCursor.style.left = `${event.clientX}px`;
-                    customCursor.style.top = `${event.clientY}px`;
-                  });
+                function onBallClick(event) {
+                  event.stopPropagation();
+                  isClicked = true;
+                  updateScore();
+                  updateIntervalDuration();
+                  moveBall();
+                  startInterval();
+                }
                         </code></pre>
             </li>
 
@@ -648,118 +609,30 @@
 
             <li class="step__content">
               <p class="step__text">
-                Vervang nu de volledige inhoud van <code>main.js</code> met onderstaande code. Deze
-                bevat de game-over logica en herstart het spel wanneer je op de spatiebalk drukt.
+                Pas de <strong>inhoud van de functie</strong> <code>onBackgroundClick</code> aan zoals hieronder
+                en <strong>voeg de functies</strong> <code>gameOver</code> en <code>restartGame</code> toe aan je
+                <code>main.js</code>-bestand.
+                Deze code zorgt ervoor dat het spel stopt bij een foute klik, en opnieuw gestart kan worden met de
+                spatiebalk.
               </p>
               <pre class="language-js"><code>
-                  let score = 0;
-                  let isClicked = false;
-                  let intervalId;
-                  let intervalDuration = 4000;
-                  
-                  function moveBall() {
-                    const $ball = document.getElementById('ball');
-                  
-                    const maxX = window.innerWidth - $ball.offsetWidth;
-                    const maxY = window.innerHeight - $ball.offsetHeight;
-                  
-                    const randomX = Math.random() * maxX;
-                    const randomY = Math.random() * maxY;
-                  
-                    $ball.getAnimations().forEach(animation => animation.cancel());
-                  
-                    const animation = $ball.animate(
-                      [
-                        { transform: `translate(${randomX}px, ${randomY}px)` }
-                      ],
-                      { duration: 1000, fill: 'forwards' }
-                    );
-                  
-                    animation.onfinish = () => {
-                      $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                    };
+                function onBackgroundClick() {
+                  animateBoardFlash("red", "rgb(203, 203, 203)");
+                  gameOver();
+                }
+
+                function gameOver() {
+                  clearInterval(intervalId);
+                  handleGameOverDisplay();
+                  document.addEventListener("keydown", restartGame);
+                }
+                
+                function restartGame(event) {
+                  if (event.code === "Space") {
+                    document.removeEventListener("keydown", restartGame);
+                    handleGameRestart();
                   }
-                  
-                  function startInterval() {
-                    clearInterval(intervalId);
-                    intervalId = setInterval(() => {
-                      if (!isClicked) {
-                        gameOver();
-                      } else {
-                        isClicked = false;
-                      }
-                    }, intervalDuration);
-                  }
-                  
-                  function onBallClick(event) {
-                    event.stopPropagation();
-                    isClicked = true;
-                    score += 1;
-                    document.getElementById('score').innerText = `Score: ${score}`;
-                  
-                    intervalDuration = Math.max(1000, intervalDuration - 200);
-                    console.log(`Interval Duration Updated: ${intervalDuration}ms`);
-                  
-                    moveBall();
-                    startInterval();
-                  }
-                  
-                  function onBackgroundClick() {
-                    const $board = document.getElementById('board');
-                    $board.animate(
-                      [
-                        { backgroundColor: 'red' },
-                        { backgroundColor: 'rgb(203, 203, 203)' }
-                      ],
-                      { duration: 400, easing: 'ease-in-out' }
-                    );
-                    gameOver();
-                  }
-                  
-                  function gameOver() {
-                    clearInterval(intervalId);
-                    const $gameOver = document.getElementById('game-over');
-                    const $board = document.getElementById('board');
-                  
-                    $gameOver.style.display = 'block';
-                    $board.classList.add('disabled');
-                    document.getElementById('end-score').innerText = `Score: ${score}`;
-                  
-                    document.addEventListener('keydown', restartGame);
-                  }
-                  
-                  function restartGame(event) {
-                    if (event.code === 'Space') {
-                      document.removeEventListener('keydown', restartGame);
-                      const $gameOver = document.getElementById('game-over');
-                      const $board = document.getElementById('board');
-                  
-                      $gameOver.style.display = 'none';
-                      $board.classList.remove('disabled');
-                      score = 0;
-                      intervalDuration = 4000;
-                      document.getElementById('score').innerText = `Score: ${score}`;
-                      moveBall();
-                    }
-                  }
-                  
-                  function init() {
-                    const $ball = document.getElementById('ball');
-                    const $board = document.getElementById('board');
-                  
-                    $ball.addEventListener('click', onBallClick);
-                    $board.addEventListener('click', onBackgroundClick);
-                  
-                    moveBall();
-                  }
-                  
-                  init();
-                  
-                  document.addEventListener("mousemove", (event) => {
-                    const customCursor = document.getElementById("custom-cursor");
-                    customCursor.style.left = `${event.clientX}px`;
-                    customCursor.style.top = `${event.clientY}px`;
-                  });
+                }
                         </code></pre>
             </li>
 
@@ -835,149 +708,30 @@
 
             <li class="step__content">
               <p class="step__text">
-                Vervang de volledige inhoud van <code>main.js</code> met de onderstaande code. Die houdt
-                bij of je score in de top 5 hoort, en toont automatisch de bijgewerkte lijst na elk
-                spel.
+                Voeg de regel <code>checkLeaderboard()</code> toe aan het einde van de functie <code>gameOver</code>,
+                zodat na elk spel automatisch wordt gecontroleerd of je score in de top 5 hoort.
+                Voeg daarnaast <code>updateLeaderboard()</code> toe aan het einde van de <code>init()</code>-functie,
+                zodat de lijst direct zichtbaar is bij het starten van het spel.
               </p>
               <pre class="language-js"><code>
-                  let score = 0;
-                  let isClicked = false;
-                  let intervalId;
-                  let intervalDuration = 4000;
-                  
-                  let leaderboard = [0, 0, 0, 0, 0];
-                  
-                  function moveBall() {
-                    const $ball = document.getElementById("ball");
-                  
-                    const maxX = window.innerWidth - $ball.offsetWidth;
-                    const maxY = window.innerHeight - $ball.offsetHeight;
-                  
-                    const randomX = Math.random() * maxX;
-                    const randomY = Math.random() * maxY;
-                  
-                    $ball.getAnimations().forEach((animation) => animation.cancel());
-                  
-                    const animation = $ball.animate(
-                      [{ transform: `translate(${randomX}px, ${randomY}px)` }],
-                      { duration: 1000, fill: "forwards" }
-                    );
-                  
-                    animation.onfinish = () => {
-                      $ball.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                    };
-                  }
-                  
-                  function startInterval() {
-                    clearInterval(intervalId);
-                    intervalId = setInterval(() => {
-                      if (!isClicked) {
-                        gameOver();
-                      } else {
-                        isClicked = false;
-                      }
-                    }, intervalDuration);
-                  }
-                  
-                  function onBallClick(event) {
-                    event.stopPropagation();
-                    isClicked = true;
-                    score += 1;
-                    document.getElementById("score").innerText = `Score: ${score}`;
-                  
-                    intervalDuration = Math.max(1000, intervalDuration - 200);
-                    console.log(`Interval Duration Updated: ${intervalDuration}ms`);
-                  
-                    moveBall();
-                    startInterval();
-                  }
-                  
-                  function onBackgroundClick() {
-                    const $board = document.getElementById("board");
-                    $board.animate(
-                      [{ backgroundColor: "red" }, { backgroundColor: "rgb(203, 203, 203)" }],
-                      { duration: 400, easing: "ease-in-out" }
-                    );
-                    gameOver();
-                  }
-                  
-                  function gameOver() {
-                    clearInterval(intervalId);
-                    const $gameOver = document.getElementById("game-over");
-                    const $board = document.getElementById("board");
-                  
-                    $gameOver.style.display = "block";
-                    $board.classList.add("disabled");
-                    document.getElementById("end-score").innerText = `Score: ${score}`;
-                  
-                    checkLeaderboard();
-                  
-                    document.addEventListener("keydown", restartGame);
-                  }
-                  
-                  function restartGame(event) {
-                    if (event.code === "Space") {
-                      document.removeEventListener("keydown", restartGame);
-                      const $gameOver = document.getElementById("game-over");
-                      const $board = document.getElementById("board");
-                  
-                      $gameOver.style.display = "none";
-                      $board.classList.remove("disabled");
-                      score = 0;
-                      intervalDuration = 4000;
-                      document.getElementById("score").innerText = `Score: ${score}`;
-                      updateLeaderboard();
-                      moveBall();
-                    }
-                  }
-                  
-                  function updateLeaderboard() {
-                    const $leaderboardList = document.getElementById("leaderboard-list");
-                    $leaderboardList.innerHTML = "";
-                  
-                    leaderboard.forEach((score, index) => {
-                      const li = document.createElement("li");
-                  
-                      const rankSpan = document.createElement("span");
-                      rankSpan.textContent = `${index + 1}`;
-                  
-                      const scoreSpan = document.createElement("span");
-                      scoreSpan.textContent = score;
-                  
-                      li.appendChild(rankSpan);
-                      li.appendChild(scoreSpan);
-                      $leaderboardList.appendChild(li);
-                    });
-                  }
-                  
-                  function checkLeaderboard() {
-                    if (score > leaderboard[4]) {
-                      leaderboard.push(score);
-                      leaderboard.sort((a, b) => b - a);
-                      leaderboard = leaderboard.slice(0, 5);
-                      updateLeaderboard();
-                    }
-                  }
-                  
-                  function init() {
-                    const $ball = document.getElementById("ball");
-                    const $board = document.getElementById("board");
-                  
-                    $ball.addEventListener("click", onBallClick);
-                    $board.addEventListener("click", onBackgroundClick);
-                  
-                    moveBall();
-                    updateLeaderboard();
-                  }
-                  
-                  init();
-                  
-                  document.addEventListener("mousemove", (event) => {
-                    const customCursor = document.getElementById("custom-cursor");
-                    customCursor.style.left = `${event.clientX}px`;
-                    customCursor.style.top = `${event.clientY}px`;
-                  });
-                        </code></pre>
+            function gameOver() {
+              clearInterval(intervalId);
+              handleGameOverDisplay();
+              checkLeaderboard();
+              document.addEventListener("keydown", restartGame);
+            }
+            
+            function init() {
+              const $ball = document.getElementById("ball");
+              const $board = document.getElementById("board");
+            
+              $ball.addEventListener("click", onBallClick);
+              $board.addEventListener("click", onBackgroundClick);
+            
+              moveBall();
+              updateLeaderboard();
+            }
+              </code></pre>
             </li>
 
             <li class="step__content">
@@ -999,18 +753,18 @@
           <h3 class="step__title">Stap 8 (optioneel): 💥 Nog moeilijker maken?</h3>
           <p class="step__text">
             Wil je het spel extra uitdagend maken? Laat de bal nog sneller bewegen door het minimale
-            interval te verlagen. Standaard stopt het interval op 1000 milliseconden (1 seconde), maar je
-            kunt dit aanpassen.
+            interval te verlagen en de animatiesnelheid aan te passen. Hieronder lees je hoe je dat doet.
           </p>
 
           <ol class="step__item">
             <li class="step__content">
               <p class="step__text">
-                Zoek in <code>main.js</code> naar deze regel in de <code>onBallClick()</code>-functie:
+                Open <code>function.js</code> en zoek met <strong>Ctrl + F</strong> naar deze regel in de
+                <code>updateIntervalDuration()</code>-functie:
               </p>
               <pre class="language-js"><code>
-                  intervalDuration = Math.max(1000, intervalDuration - 200);
-                        </code></pre>
+        intervalDuration = Math.max(1000, intervalDuration - 200);
+              </code></pre>
             </li>
 
             <li class="step__content">
@@ -1019,34 +773,36 @@
                 interval daalt tot 500 milliseconden (een halve seconde):
               </p>
               <pre class="language-js"><code>
-                  intervalDuration = Math.max(500, intervalDuration - 200);
-                        </code></pre>
+        intervalDuration = Math.max(500, intervalDuration - 200);
+              </code></pre>
             </li>
 
             <li class="step__content">
               <p class="step__text">
-                Wil je het nóg pittiger maken? Verlaag ook de animatiesnelheid van de bal. Zoek in de
-                <code>moveBall()</code>-functie deze regel:
+                Zoek in <code>function.js</code> naar de <code>moveBall()</code>-functie en ga op zoek naar
+                deze regel (tip: gebruik opnieuw <strong>Ctrl + F</strong>):
               </p>
               <pre class="language-js"><code>
-                  { duration: 1000, fill: "forwards" }
-                        </code></pre>
+        { duration: 1000, fill: "forwards" }
+              </code></pre>
               <p class="step__text">
-                En verander <code>1000</code> naar <code>600</code> milliseconden:
+                Verander <code>1000</code> naar <code>600</code> milliseconden om de bewegingsanimatie van de bal te
+                versnellen:
               </p>
               <pre class="language-js"><code>
-                  { duration: 600, fill: "forwards" }
-                        </code></pre>
+        { duration: 600, fill: "forwards" }
+              </code></pre>
             </li>
 
             <li class="step__content">
               <p class="step__text">
-                Hoe lager de getallen, hoe sneller en moeilijker het spel. Experimenteer en daag jezelf
-                uit!
+                Hoe lager de getallen, hoe sneller en moeilijker het spel wordt. Experimenteer met verschillende
+                waarden en daag jezelf uit!
               </p>
             </li>
           </ol>
         </li>
+
       </ol>
     </section>
   </main>
