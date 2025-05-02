@@ -21,4 +21,8 @@ Aan het einde heb je een volledig werkende reaction game met score, game over me
 👉 Bekijk de live versie via **GitHub Pages**:   
 https://pgmgent-atwork2.github.io/project-1-workshop-start-to-code-zeger/
 
+🎮 **Speel de Reaction Game hier**:  
+https://pgmgent-atwork2.github.io/project-1-workshop-start-to-code-zeger/demo/
+
+
 
